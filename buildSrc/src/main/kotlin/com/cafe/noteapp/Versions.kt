@@ -4,7 +4,7 @@ object Versions {
     const val arrow = "0.10.4"
     const val gradle = "4.2.1"
     const val ktlint = "0.37.2"
-    const val kotlin = "1.5.0"
+    const val kotlin = "1.3.72"
     const val coroutines = "1.3.3"
     const val gradleVersions = "0.27.0"
     const val arch = "2.2.0"
