@@ -1,24 +1,23 @@
 import com.cafe.noteapp.Android
 import com.cafe.noteapp.Libs
 
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: "androidx.navigation.safeargs"
 
 android {
     compileSdkVersion Android.compileSdkVersion
     buildToolsVersion Android.buildToolsVersion
 
     defaultConfig {
-        applicationId Android.applicationId
         minSdkVersion Android.minSdkVersion
         targetSdkVersion Android.targetSdkVersion
         versionCode Android.versionCode
         versionName Android.versionName
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
     }
 
     buildTypes {
@@ -37,54 +36,22 @@ android {
 }
 
 dependencies {
+
     implementation Libs.Common.kotlin
-    implementation Libs.Common.coreKtx
     implementation Libs.Common.coroutines
-    implementation Libs.Common.coroutinesAndroid
     implementation Libs.Common.arrowCore
     implementation Libs.Common.arrowSyntax
     kapt Libs.Common.arrowMeta
-
-    // Project Submodules
-    implementation project(Libs.Modules.data)
-
-    // Jetpack
     implementation Libs.Jetpack.lifecycleExtensions
-    implementation Libs.Jetpack.viewModelKtx
     implementation Libs.Jetpack.livedataKtx
-    implementation Libs.Jetpack.room
-    implementation Libs.Jetpack.roomCompiler
-    implementation Libs.Jetpack.roomCoroutines
-
-    implementation Libs.Jetpack.material
-    implementation Libs.Jetpack.constraintLayout
-    implementation Libs.Jetpack.navigationFragment
-    implementation Libs.Jetpack.navigationUi
-    implementation Libs.Jetpack.fragment
-
-    // Dagger
     implementation Libs.Common.dagger
-    implementation Libs.Common.daggerAndroid
     kapt Libs.Common.daggerCompiler
-    kapt Libs.Common.daggerAndroidCompiler
-
-    // Retrofit - OkHttp
+    implementation Libs.Jetpack.room
+    implementation Libs.Jetpack.roomKtx
+    kapt Libs.Jetpack.roomCompiler
+    implementation Libs.Common.gson
     implementation Libs.Common.retrofit
     implementation Libs.Common.retrofitGson
-    implementation Libs.Common.okHttpInterceptor
-    implementation Libs.Common.stetho
-    implementation Libs.Common.stetho_OkHttp
-
-    // Glide
-    implementation Libs.Common.glide
-    kapt Libs.Common.glideCompiler
-
-    // Test Dependencies
     testImplementation Libs.Testing.junit
     testImplementation Libs.Testing.mockitoKotlin
-    testImplementation Libs.Testing.archTesting
-    androidTestImplementation Libs.Testing.testRunner
-    androidTestImplementation Libs.Testing.esperesso
-
-    implementation Libs.Common.appCompat
 }

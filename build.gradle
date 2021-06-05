@@ -1,12 +1,18 @@
+import com.cafe.noteapp.Libs
+
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
-    ext.kotlin_version = "1.5.0"
+    ext {
+        kotlin_version = '1.5.0'
+    }
     repositories {
         google()
         mavenCentral()
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:4.2.1"
+        classpath Libs.Plugins.gradle
+        classpath Libs.Plugins.kotlin
+        classpath Libs.Plugins.safeargs
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
 
         // NOTE: Do not place your application dependencies here; they belong
@@ -18,6 +24,7 @@ allprojects {
     repositories {
         google()
         mavenCentral()
+        maven { url "https://dl.bintray.com/arrow-kt/arrow-kt/" }
         jcenter() // Warning: this repository is going to shut down soon
     }
 }
