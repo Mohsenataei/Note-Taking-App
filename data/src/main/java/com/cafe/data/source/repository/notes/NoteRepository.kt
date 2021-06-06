@@ -1,6 +1,5 @@
 package com.cafe.data.source.repository.notes
 
-import androidx.room.Dao
 import arrow.core.Either
 import com.cafe.data.source.db.dao.NoteDao
 import com.cafe.data.source.db.model.Note

@@ -1,18 +1,24 @@
 package com.cafe.data.source.db.model
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.Index
-import androidx.room.PrimaryKey
+import androidx.room.*
 
 
 @Entity(
     tableName = "notes",
-    indices = [Index("creation_data")]
+    indices = [Index("creation_date")],
+    foreignKeys = arrayOf(
+        ForeignKey(
+            entity = Folder::class,
+            parentColumns = arrayOf("index"),
+            childColumns = arrayOf("creation_date"),
+            onDelete = ForeignKey.CASCADE
+        )
+    )
 )
 data class Note(
     @PrimaryKey
     @ColumnInfo(name = "creation_date")
     val creationDate: String,
-    val contents: String
+    val contents: String,
+    val folderId: Long
 )
