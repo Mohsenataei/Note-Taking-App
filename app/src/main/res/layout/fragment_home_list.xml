@@ -11,7 +11,7 @@
 
         <variable
             name="adapter"
-            type="" />
+            type="com.cafe.noteapp.ui.home.list.adapter.MultiLayoutAdapter" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -29,6 +29,8 @@
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:adapter="@{adapter}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/notesTitle"
             tools:listitem="@layout/list_row_item" />

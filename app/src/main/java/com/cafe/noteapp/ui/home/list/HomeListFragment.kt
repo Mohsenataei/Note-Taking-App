@@ -1,14 +1,19 @@
 package com.cafe.noteapp.ui.home.list
 
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.core.view.isVisible
 import com.cafe.noteapp.R
 import com.cafe.noteapp.databinding.FragmentHomeListBinding
+import com.cafe.noteapp.databinding.ListRowItemBinding
 import com.cafe.noteapp.ui.base.BaseFragment
 import com.cafe.noteapp.ui.base.ViewModelScope
 import com.cafe.noteapp.ui.home.dialog.NewFolderDialog
+import com.cafe.noteapp.ui.home.list.HomeListViewModel.Companion.TAG
+import com.cafe.noteapp.ui.home.list.adapter.MultiLayoutAdapter
 import com.cafe.noteapp.util.extentions.findNaveController
+import com.cafe.noteapp.util.extentions.observeSafe
 
 class HomeListFragment : BaseFragment<HomeListViewModel, FragmentHomeListBinding>(),
     View.OnClickListener {
@@ -21,6 +26,16 @@ class HomeListFragment : BaseFragment<HomeListViewModel, FragmentHomeListBinding
         super.onViewInitialized(binding)
         initView()
         binding.viewModel = viewModel
+        binding.adapter = MultiLayoutAdapter<ListItem, ListRowItemBinding>(
+            layoutId = R.layout.list_row_item,
+            onItemClicked = {
+                Log.d(TAG, "onViewInitialized: $it")
+            }
+        )
+
+        viewModel.listItemLiveData.observeSafe(viewLifecycleOwner) {
+            binding.adapter?.swapItems(it)
+        }
 
     }
 
@@ -55,7 +70,7 @@ class HomeListFragment : BaseFragment<HomeListViewModel, FragmentHomeListBinding
             }
 
             R.id.addNoteBtn -> {
-                findNaveController().navigate(HomeListFragmentDirections.actionHomeListFragmentToListDetailFragment())
+                findNaveController().navigate(HomeListFragmentDirections.actionHomeListFragmentToNoteDetailFragment())
             }
         }
     }

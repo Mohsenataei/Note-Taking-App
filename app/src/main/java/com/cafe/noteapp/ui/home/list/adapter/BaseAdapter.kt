@@ -22,7 +22,7 @@ import com.cafe.noteapp.BR
  *
  */
 abstract class BaseAdapter<T : Any, B : ViewDataBinding>(
-    private val itemBindingId: Int = BR._all,
+    private val itemBindingId: Int = BR.item,
     items: List<T> = emptyList(),
     private val onItemClicked: ((T) -> Unit)? = null,
     private val onBind: B.(Int) -> Unit = {}
