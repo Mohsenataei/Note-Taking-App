@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources> <!--  TEXT SIZE  -->
+    <dimen name="text_size_small">8sp</dimen>
+    <dimen name="text_size_x_small">10sp</dimen>
+    <dimen name="text_size_2x_small">12sp</dimen>
+    <dimen name="text_size_middle">14sp</dimen>
+    <dimen name="text_size_x_middle">16sp</dimen>
+    <dimen name="text_size_2x_middle">18sp</dimen>
+    <dimen name="text_size_large">20sp</dimen>
+    <dimen name="text_size_x_large">22sp</dimen>
+    <dimen name="text_size_2x_large">24sp</dimen>
+    <dimen name="text_size_huge">26sp</dimen>
+    <dimen name="text_size_x_huge">28sp</dimen>
+    <dimen name="text_size_2x_huge">30sp</dimen>
+    <dimen name="text_size_spaced">32sp</dimen>
+    <dimen name="text_size_x_spaced">34sp</dimen>
+    <dimen name="text_size_2x_spaced">36sp</dimen>
+
+    <!--  PADDING  -->
+    <dimen name="padding_ss_small">2dp</dimen>
+    <dimen name="padding_s_small">4dp</dimen>
+    <dimen name="padding_2xs_small">4dp</dimen>
+    <dimen name="padding_small">8dp</dimen>
+    <dimen name="padding_x_small">10dp</dimen>
+    <dimen name="padding_2x_small">12dp</dimen>
+    <dimen name="padding_middle">14dp</dimen>
+    <dimen name="padding_x_middle">16dp</dimen>
+    <dimen name="padding_2x_middle">18dp</dimen>
+    <dimen name="padding_large">20dp</dimen>
+    <dimen name="padding_x_large">22dp</dimen>
+    <dimen name="padding_2x_large">24dp</dimen>
+    <dimen name="padding_huge">26dp</dimen>
+    <dimen name="padding_x_huge">28dp</dimen>
+    <dimen name="padding_2x_huge">30dp</dimen>
+    <dimen name="padding_spaced">32dp</dimen>
+    <dimen name="padding_x_spaced">34dp</dimen>
+    <dimen name="padding_2x_spaced">36dp</dimen>
+    <dimen name="padding_3x_spaced">46dp</dimen>
+
+
+    <!--  MARGIN  -->
+    <dimen name="margin_s_small">4dp</dimen>
+    <dimen name="margin_small">8dp</dimen>
+    <dimen name="margin_x_small">10dp</dimen>
+    <dimen name="margin_2x_small">12dp</dimen>
+    <dimen name="margin_medium">14dp</dimen>
+    <dimen name="margin_x_middle">16dp</dimen>
+    <dimen name="margin_2x_middle">18dp</dimen>
+    <dimen name="margin_large">20dp</dimen>
+    <dimen name="margin_x_large">22dp</dimen>
+    <dimen name="margin_2x_large">24dp</dimen>
+    <dimen name="margin_huge">26dp</dimen>
+    <dimen name="margin_x_huge">28dp</dimen>
+    <dimen name="margin_2x_huge">30dp</dimen>
+    <dimen name="margin_spaced">32dp</dimen>
+    <dimen name="margin_x_spaced">34dp</dimen>
+    <dimen name="margin_2x_spaced">36dp</dimen>
+    <dimen name="margin_3x_spaced">40dp</dimen>
+    <dimen name="margin_3.5x_spaced">45dp</dimen>
+    <dimen name="margin_50dp">50dp</dimen>
+    <dimen name="margin_60dp">60dp</dimen>
+    <dimen name="margin_4x_spaced">70dp</dimen>
+    <dimen name="margin_6x_spaced">80dp</dimen>
+    <dimen name="margin_6.5x_spaced">88dp</dimen>
+    <dimen name="margin_7x_spaced">100dp</dimen>
+
+    <!--  RADIUS  -->
+    <dimen name="radius_small">5dp</dimen>
+    <dimen name="radius_x_small">10dp</dimen>
+    <dimen name="radius_2x_small">15dp</dimen>
+    <dimen name="radius_medium">20dp</dimen>
+    <dimen name="radius_large">25dp</dimen>
+    <dimen name="radius_huge">30dp</dimen>
+    <dimen name="radius_spaces">35dp</dimen>
+    <dimen name="radius_shape_round_corner">200dp</dimen>
+
+    <!--  Shadow  -->
+    <dimen name="shadow_dp">3dp</dimen>
+</resources>
