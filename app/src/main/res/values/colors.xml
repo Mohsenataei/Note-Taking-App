@@ -8,5 +8,6 @@
     <color name="textColorLightGray">#9DA0AF</color>
     <color name="editTextBackground">#F9FAFD</color>
     <color name="white">#FFFFFF</color>
-
+    <color name="lightBlue">#EBF8FF</color>
+    <color name="lightOrange">#FFF8BE</color>
 </resources>

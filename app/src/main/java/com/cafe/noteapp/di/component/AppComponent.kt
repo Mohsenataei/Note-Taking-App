@@ -5,6 +5,7 @@ import com.cafe.noteapp.app.NoteApp
 import com.cafe.noteapp.di.builder.ActivityBuilder
 import com.cafe.noteapp.di.module.AppModule
 import com.cafe.noteapp.di.module.DataBaseModule
+import com.cafe.noteapp.di.module.UtilModule
 import com.cafe.noteapp.ui.home.dialog.NewFolderDialog
 import dagger.BindsInstance
 import dagger.Component
@@ -18,6 +19,7 @@ import javax.inject.Singleton
     modules = [
         (DataBaseModule::class),
         (AppModule::class),
+        (UtilModule::class),
         (AndroidInjectionModule::class),
         (ActivityBuilder::class)
     ]
@@ -29,7 +31,6 @@ interface AppComponent : AndroidInjector<NoteApp> {
             fun create(@BindsInstance application: Context): AppComponent
         }
     }
-
 
 
 }

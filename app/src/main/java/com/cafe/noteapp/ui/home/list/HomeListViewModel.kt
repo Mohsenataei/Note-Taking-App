@@ -10,14 +10,18 @@ import com.cafe.data.source.db.model.Folder
 import com.cafe.data.source.db.model.Note
 import com.cafe.data.source.mapper.Error
 import com.cafe.data.source.repository.notes.NoteRepository
+import com.cafe.noteapp.R
 import com.cafe.noteapp.ui.base.BaseViewModel
 import com.cafe.noteapp.ui.home.dialog.FolderItem
 import com.cafe.noteapp.util.livedata.NonNullLiveData
+import com.cafe.noteapp.util.provider.BaseResourceProvider
+import com.cafe.noteapp.util.provider.ResourceProvider
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class HomeListViewModel @Inject constructor(
-    private val noteRepository: NoteRepository
+    private val noteRepository: NoteRepository,
+    private val resourceProvider: BaseResourceProvider
 ) : BaseViewModel() {
 
     private val _allNotes = NonNullLiveData<List<NoteItem>>(emptyList())
@@ -112,9 +116,10 @@ class HomeListViewModel @Inject constructor(
         return notes.map {
             ListItem(
                 name = it.title,
-                created_data = it.created_data,
+                description = it.created_data,
                 type = NOTE,
-                count = null
+                icon = resourceProvider.getDrawable(R.drawable.ic_note_blue),
+                iconBackground = resourceProvider.getDrawable(R.drawable.circle_light_blue_bg)
             )
         }
     }
@@ -123,9 +128,10 @@ class HomeListViewModel @Inject constructor(
         return folders.map {
             ListItem(
                 name = it.folderName,
-                created_data = it.createDate,
+                description = "حاوی ${folders.size} یادداشت ",
                 type = FOLDER,
-                count = folders.size
+                icon = resourceProvider.getDrawable(R.drawable.ic_folder_orange),
+                iconBackground = resourceProvider.getDrawable(R.drawable.circle_light_orange_bg)
             )
         }
     }
