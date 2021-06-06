@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textColorPrimary">@color/textColorPrimary</item>
+        <item name="android:textViewStyle">@style/TextView</item>
+        <item name="android:editTextStyle">@style/EditText</item>
+
+    </style>
+
+
+    <!-- =================== EditText =============================   -->
+
+    <style name="EditText" parent="android:Widget.EditText">
+        <item name="android:fontFamily">@font/default_font</item>
+        <item name="hintTextColor">@color/textColorLightGray</item>
+        <item name="background">@color/editTextBackground</item>
+        <item name="android:textSize">@dimen/text_size_middle</item>
+        <item name="android:layout_margin">@dimen/margin_x_middle</item>
+    </style>
+
+
+    <!-- =================== TextView ============================= -->
+
+    <style name="TextView" parent="android:Widget.TextView">
+        <item name="android:fontFamily">@font/default_font</item>
+    </style>
+
+    <style name="AppTheme.TextView.Base" parent="TextView">
+        <item name="fontStyle">normal</item>
+        <item name="android:fontFamily">@font/default_font</item>
+        <item name="android:textColor">@color/textColorPrimary</item>
+    </style>
+
+    <style name="AppTheme.TextView.Headline1" parent="AppTheme.TextView.Base">
+        <item name="android:textSize">@dimen/text_size_2x_middle</item>
+    </style>
+
+    <style name="AppTheme.TextView.Headline2" parent="AppTheme.TextView.Base">
+        <item name="android:textSize">@dimen/text_size_x_middle</item>
+    </style>
+
+    <style name="AppTheme.TextView.Headline3" parent="AppTheme.TextView.Base">
+        <item name="android:textSize">@dimen/text_size_middle</item>
+    </style>
+
+    <style name="AppTheme.TextView.Headline4" parent="AppTheme.TextView.Base">
+        <item name="android:textSize">@dimen/text_size_middle</item>
+    </style>
+
+    <style name="AppTheme.TextView.Headline5" parent="AppTheme.TextView.Base">
+        <item name="android:textSize">@dimen/text_size_x_small</item>
+    </style>
+
+    <style name="AppTheme.TextView.RowTitle" parent="AppTheme.TextView.Headline2">
+        <item name="android:textStyle">bold</item>
+        <item name="android:padding">@dimen/padding_2xs_small</item>
+        <item name="android:layout_marginEnd">@dimen/margin_x_middle</item>
+        <item name="android:layout_marginTop">@dimen/margin_2x_small</item>
+        <item name="android:layout_marginStart">@dimen/margin_x_middle</item>
+    </style>
+
+    <style name="AppTheme.TextView.Title" parent="AppTheme.TextView.Headline1">
+        <item name="android:textStyle">bold</item>
+        <item name="android:padding">@dimen/padding_2xs_small</item>
+        <item name="android:layout_marginEnd">@dimen/margin_x_middle</item>
+        <item name="android:layout_marginTop">@dimen/margin_2x_small</item>
+        <item name="android:layout_marginStart">@dimen/margin_x_middle</item>
+    </style>
+
+    <style name="AppTheme.TextView.DialogHeadLine" parent="AppTheme.TextView.Headline2">
+        <item name="android:layout_margin">@dimen/margin_x_middle</item>
+    </style>
+
+    <style name="AppTheme.TextView.DialogTitle" parent="AppTheme.TextView.Headline3">
+        <item name="android:layout_margin">@dimen/margin_x_middle</item>
+    </style>
+
+
+    <style name="AppTheme.TextView.Description" parent="AppTheme.TextView.Headline2">
+        <item name="android:padding">@dimen/padding_2xs_small</item>
+        <item name="android:textColor">@color/textColorLightGray</item>
+        <item name="android:layout_marginEnd">@dimen/margin_x_middle</item>
+        <item name="android:layout_marginStart">@dimen/margin_x_middle</item>
+        <item name="android:layout_marginBottom">@dimen/margin_2x_small</item>
+    </style>
+
+
+    <!-- =================== Button ============================= -->
+    <style name="AppTheme.Button.Base" parent="@android:style/Widget.Button">
+        <item name="android:textSize">@dimen/text_size_middle</item>
+        <item name="android:padding">@dimen/padding_2x_middle</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:fontFamily">@font/default_font</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <style name="AppTheme.Button.Confirm" parent="AppTheme.Button.Base">
+        <item name="android:textColor">@color/white</item>
+        <item name="background">@drawable/base_button_background_drawable</item>
+        <item name="android:layout_marginTop">@dimen/margin_x_middle</item>
+    </style>
+
+    <style name="AppTheme.Button.Cancel" parent="AppTheme.Button.Base">
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:layout_margin">@dimen/margin_x_middle</item>
+    </style>
+
+
+</resources>

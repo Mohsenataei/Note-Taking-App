@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/newFolderTv"
+            style="@style/AppTheme.TextView.DialogHeadLine"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/new_folder"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/folderNameTv"
+            style="@style/AppTheme.TextView.DialogTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/write_your_folder_title"
+            app:layout_constraintTop_toBottomOf="@id/newFolderTv" />
+
+        <EditText
+            android:id="@+id/newFolderTitleEd"
+            style="@style/EditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="عنوان پوشه"
+            app:layout_constraintTop_toBottomOf="@id/folderNameTv" />
+
+        <Button
+            android:id="@+id/createFolderBtn"
+            style="@style/AppTheme.Button.Confirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/create_folder"
+            app:layout_constraintStart_toStartOf="@+id/newFolderTitleEd"
+            app:layout_constraintTop_toBottomOf="@+id/newFolderTitleEd" />
+
+        <Button
+            android:id="@+id/cancel"
+            style="@style/AppTheme.Button.Cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cancel"
+            app:layout_constraintStart_toEndOf="@+id/createFolderBtn"
+            app:layout_constraintTop_toBottomOf="@+id/newFolderTitleEd" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

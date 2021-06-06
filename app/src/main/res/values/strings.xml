@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Notes App</string>
+    <string name="notes">یادداشت ها</string>
+    <string name="new_folder">پوشه جدید</string>
+    <string name="write_your_folder_title">برای پوشه خود عنوان بنویسید .</string>
+    <string name="create_folder">ایجاد پوشه</string>
+    <string name="cancel">انصراف</string>
 </resources>

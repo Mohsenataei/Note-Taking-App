@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data />
 
@@ -9,18 +10,28 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/sampleText"
+            android:id="@+id/notesTitle"
+            style="@style/AppTheme.TextView.Title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Every thing is working just fine"
+            android:text="@string/notes"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/notesTitle"
+            tools:listitem="@layout/note_row_item" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/plusBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/purple_500"
+            android:layout_margin="@dimen/margin_x_middle"
+            android:background="?attr/selectableItemBackground"
             android:src="@drawable/ic_add_24"
+            app:elevation="@dimen/elevation_small"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
