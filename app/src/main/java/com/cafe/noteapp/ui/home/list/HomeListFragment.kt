@@ -19,7 +19,9 @@ class HomeListFragment : BaseFragment<HomeListViewModel, FragmentHomeListBinding
 
     override fun onViewInitialized(binding: FragmentHomeListBinding) {
         super.onViewInitialized(binding)
-        initView();
+        initView()
+        binding.viewModel = viewModel
+
     }
 
     private fun initView() {
@@ -29,7 +31,7 @@ class HomeListFragment : BaseFragment<HomeListViewModel, FragmentHomeListBinding
     }
 
     private fun addFolderDialog() {
-        val newFolderDialog: NewFolderDialog = NewFolderDialog(
+        val newFolderDialog = NewFolderDialog(
             onConfirm = {
                 viewModel.insertNewFolder(it)
             },

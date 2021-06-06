@@ -38,4 +38,8 @@ class NoteRepository @Inject constructor(
     suspend fun insertNewFolder(folder: Folder): Either<Error, Long> {
         return safeCall { folderDao.insertOrUpdate(folder) }
     }
+
+    suspend fun getAllFolders(): Either<Error, List<Folder>> {
+        return safeCall { folderDao.getAllFolders() }
+    }
 }

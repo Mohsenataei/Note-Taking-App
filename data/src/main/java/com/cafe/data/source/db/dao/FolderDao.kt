@@ -7,7 +7,7 @@ import com.cafe.data.source.db.model.Note
 @Dao
 interface FolderDao {
     @Query("SELECT * FROM folder")
-    suspend fun getNotes(): List<Folder>
+    suspend fun getAllFolders(): List<Folder>
 
     @Query("SELECT * FROM folder WHERE  `index` = :index")
     suspend fun getNoteById(index: Long): Folder

@@ -8,6 +8,10 @@
         <variable
             name="viewModel"
             type="com.cafe.noteapp.ui.home.list.HomeListViewModel" />
+
+        <variable
+            name="adapter"
+            type="" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -27,7 +31,7 @@
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/notesTitle"
-            tools:listitem="@layout/note_row_item" />
+            tools:listitem="@layout/list_row_item" />
 
         <ImageView
             android:id="@+id/plusBtn"

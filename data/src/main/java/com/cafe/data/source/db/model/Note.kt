@@ -20,5 +20,6 @@ data class Note(
     @ColumnInfo(name = "creation_date")
     val creationDate: String,
     val contents: String,
+    val title: String,
     val folderId: Long
 )
