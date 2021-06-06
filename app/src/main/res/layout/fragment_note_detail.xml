@@ -13,12 +13,22 @@
 
         <ImageView
             android:id="@+id/listDetailBackBtn"
+            style="@style/ImageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_x_middle"
             android:src="@drawable/ic_back"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <com.pnikosis.materialishprogress.ProgressWheel
+            android:id="@+id/noteLading"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:translationZ="20dp"
+            app:matProg_barColor="@color/colorPrimary"
+            app:matProg_progressIndeterminate="true" />
 
 
         <TextView
@@ -33,17 +43,16 @@
 
         <ImageView
             android:id="@+id/listDetailMoteOptionsBtn"
+            style="@style/ImageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_x_middle"
-            android:layout_marginStart="@dimen/margin_x_middle"
             android:src="@drawable/ic_more"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/noteDetailTitle"
-            style="@style/Widget.AppCompat.EditText"
+            style="@style/EditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="لیست کار ها"
@@ -51,8 +60,11 @@
 
         <EditText
             android:id="@+id/noteDetailContent"
+            style="@style/EditText"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:gravity="top"
+            android:hint="توضیحات"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/noteDetailTitle" />
 

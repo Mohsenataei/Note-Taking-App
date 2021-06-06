@@ -49,16 +49,27 @@ class HomeListViewModel @Inject constructor(
         get() = _ListItemLiveData
 
 
-    init {
+    fun refreshList() {
         getAllNotes()
         getAllFolders()
     }
 
+    init {
+        refreshList()
+    }
+
     fun getAllNotes() {
+        _loadingLiveData.value = false
         viewModelScope.launch {
             when (val result = noteRepository.getAllNotes()) {
-                is Right -> _allNotes.value = mapToNoteItem(result.b)
-                is Left -> showError(result.a)
+                is Right -> {
+                    _loadingLiveData.value = true
+                    _allNotes.value = mapToNoteItem(result.b)
+                }
+                is Left -> {
+                    _loadingLiveData.value = true
+                    showError(result.a)
+                }
             }
         }
     }
@@ -66,6 +77,7 @@ class HomeListViewModel @Inject constructor(
     private fun mapToNoteItem(notes: List<Note>): List<NoteItem> {
         return notes.map {
             NoteItem(
+                id = it.folderId?.toInt(),
                 content = it.contents,
                 title = it.title,
                 created_data = it.creationDate
@@ -74,10 +86,17 @@ class HomeListViewModel @Inject constructor(
     }
 
     fun getAllFolders() {
+        _loadingLiveData.value = false
         viewModelScope.launch {
             when (val result = noteRepository.getAllFolders()) {
-                is Right -> _allFolders.value = mapToFolderItem(result.b)
-                is Left -> showError(result.a)
+                is Right -> {
+                    _loadingLiveData.value = false
+                    _allFolders.value = mapToFolderItem(result.b)
+                }
+                is Left -> {
+                    _loadingLiveData.value = false
+                    showError(result.a)
+                }
             }
         }
     }
@@ -86,7 +105,10 @@ class HomeListViewModel @Inject constructor(
         _loadingLiveData.value = false
         viewModelScope.launch {
             when (val result = noteRepository.insertNewFolder(mapToFolder(newFolder))) {
-                is Right -> _loadingLiveData.value = true
+                is Right -> {
+                    _loadingLiveData.value = true
+                    refreshList()
+                }
                 is Left -> {
                     _loadingLiveData.value = true
                     showError(result.a)
@@ -106,6 +128,7 @@ class HomeListViewModel @Inject constructor(
     private fun mapToFolderItem(folders: List<Folder>): List<FolderItem> {
         return folders.map { folder ->
             FolderItem(
+                id = folder.id.toInt(),
                 folderName = folder.name,
                 createDate = folder.createDate
             )
@@ -115,6 +138,7 @@ class HomeListViewModel @Inject constructor(
     private fun mapNotesToListItem(notes: List<NoteItem>): List<ListItem> {
         return notes.map {
             ListItem(
+                id = it.id ?: -1,
                 name = it.title,
                 description = it.created_data,
                 type = NOTE,
@@ -127,6 +151,7 @@ class HomeListViewModel @Inject constructor(
     private fun mapFoldersToListItem(folders: List<FolderItem>): List<ListItem> {
         return folders.map {
             ListItem(
+                id = it.id,
                 name = it.folderName,
                 description = "حاوی ${folders.size} یادداشت ",
                 type = FOLDER,

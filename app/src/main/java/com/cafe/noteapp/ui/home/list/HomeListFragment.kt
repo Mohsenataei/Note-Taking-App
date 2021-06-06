@@ -10,6 +10,7 @@ import com.cafe.noteapp.databinding.ListRowItemBinding
 import com.cafe.noteapp.ui.base.BaseFragment
 import com.cafe.noteapp.ui.base.ViewModelScope
 import com.cafe.noteapp.ui.home.dialog.NewFolderDialog
+import com.cafe.noteapp.ui.home.list.HomeListViewModel.Companion.FOLDER
 import com.cafe.noteapp.ui.home.list.HomeListViewModel.Companion.TAG
 import com.cafe.noteapp.ui.home.list.adapter.MultiLayoutAdapter
 import com.cafe.noteapp.util.extentions.findNaveController
@@ -30,11 +31,21 @@ class HomeListFragment : BaseFragment<HomeListViewModel, FragmentHomeListBinding
             layoutId = R.layout.list_row_item,
             onItemClicked = {
                 Log.d(TAG, "onViewInitialized: $it")
+                if (it.type == FOLDER) {
+                    val destination =
+                        HomeListFragmentDirections.actionHomeListFragmentToListDetailFragment(it.id)
+//                    destination.folderId = it.id
+                    findNaveController().navigate(destination)
+                }
             }
         )
 
         viewModel.listItemLiveData.observeSafe(viewLifecycleOwner) {
             binding.adapter?.swapItems(it)
+        }
+
+        viewModel.loadingLiveData.observeSafe(viewLifecycleOwner) {
+            binding.loading.isVisible = it
         }
 
     }
@@ -70,7 +81,11 @@ class HomeListFragment : BaseFragment<HomeListViewModel, FragmentHomeListBinding
             }
 
             R.id.addNoteBtn -> {
-                findNaveController().navigate(HomeListFragmentDirections.actionHomeListFragmentToNoteDetailFragment())
+                findNaveController().navigate(
+                    HomeListFragmentDirections.actionHomeListFragmentToNoteDetailFragment(
+                        -1
+                    )
+                )
             }
         }
     }

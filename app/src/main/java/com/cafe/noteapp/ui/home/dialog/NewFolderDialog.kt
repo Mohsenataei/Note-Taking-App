@@ -50,7 +50,7 @@ class NewFolderDialog(
                     .show()
             else {
                 this.dismiss()
-                onConfirm.invoke(FolderItem(folderName, ""))
+                onConfirm.invoke(FolderItem(0, folderName, ""))
             }
         }
         binding.cancel.setOnClickListener {

@@ -79,6 +79,8 @@ dependencies {
     implementation Libs.Common.glide
     kapt Libs.Common.glideCompiler
 
+    implementation 'com.pnikosis:materialish-progress:1.7'
+
     // Test Dependencies
     testImplementation Libs.Testing.junit
     testImplementation Libs.Testing.mockitoKotlin

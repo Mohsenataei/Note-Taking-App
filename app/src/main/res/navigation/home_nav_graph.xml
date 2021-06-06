@@ -24,12 +24,20 @@
     <fragment
         android:id="@+id/listDetailFragment"
         android:name="com.cafe.noteapp.ui.home.detail.ListDetailFragment"
-        tools:layout="@layout/fragment_list_detail" />
+        tools:layout="@layout/fragment_list_detail">
+        <argument
+            android:name="folderId"
+            app:argType="integer" />
+    </fragment>
 
     <fragment
         android:id="@+id/noteDetailFragment"
         android:name="com.cafe.noteapp.ui.home.note.NoteDetailFragment"
-        tools:layout="@layout/fragment_note_detail" />
+        tools:layout="@layout/fragment_note_detail">
+        <argument
+            android:name="folderId"
+            app:argType="integer" />
+    </fragment>
 
 
 </navigation>

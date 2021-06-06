@@ -21,5 +21,5 @@ data class Note(
     val creationDate: String,
     val contents: String,
     val title: String,
-    val folderId: Long
+    val folderId: String? = null
 )

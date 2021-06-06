@@ -13,12 +13,13 @@
 
         <ImageView
             android:id="@+id/listDetailBackBtn"
+            style="@style/ImageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_x_middle"
             android:src="@drawable/ic_back"
+            app:layout_constraintBottom_toBottomOf="@+id/listDetailTitle"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@+id/listDetailTitle" />
 
         <TextView
             android:id="@+id/listDetailTitle"
