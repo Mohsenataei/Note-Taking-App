@@ -1,7 +1,9 @@
 package com.cafe.data.source.repository.notes
 
 import arrow.core.Either
+import com.cafe.data.source.db.dao.FolderDao
 import com.cafe.data.source.db.dao.NoteDao
+import com.cafe.data.source.db.model.Folder
 import com.cafe.data.source.db.model.Note
 import com.cafe.data.source.mapper.Error
 import com.cafe.data.source.mapper.ErrorMapper
@@ -10,7 +12,8 @@ import javax.inject.Inject
 
 class NoteRepository @Inject constructor(
     errorMapper: ErrorMapper,
-    private val noteDao: NoteDao
+    private val noteDao: NoteDao,
+    private val folderDao: FolderDao
 ) : BaseRepository(errorMapper) {
 
     suspend fun getAllNotes(): Either<Error, List<Note>> {
@@ -30,5 +33,9 @@ class NoteRepository @Inject constructor(
     suspend fun getNoteById(creationDate: String): Either<Error, Note> {
 
         return safeCall { noteDao.getNoteById(creationDate) }
+    }
+
+    suspend fun insertNewFolder(folder: Folder): Either<Error, Long> {
+        return safeCall { folderDao.insertOrUpdate(folder) }
     }
 }

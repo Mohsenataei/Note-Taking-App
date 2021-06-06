@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
 import com.cafe.noteapp.R
@@ -42,7 +43,15 @@ class NewFolderDialog(
         super.onViewCreated(view, savedInstanceState)
 
         binding.confirm.setOnClickListener {
-            onConfirm.invoke(FolderItem("folderName"))
+            val folderName = binding.newFolderTitleEd.text.toString()
+
+            if (folderName.isNullOrEmpty())
+                Toast.makeText(requireContext(), "لطفا نام پوشه را وارد کنید", Toast.LENGTH_SHORT)
+                    .show()
+            else {
+                this.dismiss()
+                onConfirm.invoke(FolderItem(folderName, ""))
+            }
         }
         binding.cancel.setOnClickListener {
             onCancel.invoke()

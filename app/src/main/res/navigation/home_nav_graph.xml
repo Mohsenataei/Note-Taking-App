@@ -9,7 +9,27 @@
         android:id="@+id/homeListFragment"
         android:name="com.cafe.noteapp.ui.home.list.HomeListFragment"
         android:label="HomeListFragment"
-        tools:layout="@layout/fragment_home_list" />
+        tools:layout="@layout/fragment_home_list">
+
+        <action
+            android:id="@+id/action_home_list_fragment_to_list_detail_fragment"
+            app:destination="@id/listDetailFragment" />
+
+        <action
+            android:id="@+id/action_home_list_fragment_to_note_detail_fragment"
+            app:destination="@id/noteDetailFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/listDetailFragment"
+        android:name="com.cafe.noteapp.ui.home.detail.ListDetailFragment"
+        tools:layout="@layout/fragment_list_detail" />
+
+    <fragment
+        android:id="@+id/noteDetailFragment"
+        android:name="com.cafe.noteapp.ui.home.note.NoteDetailFragment"
+        tools:layout="@layout/fragment_note_detail" />
 
 
 </navigation>

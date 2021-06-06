@@ -3,7 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data />
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.cafe.noteapp.ui.home.list.HomeListViewModel" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -29,8 +34,8 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_margin="@dimen/margin_x_middle"
-            android:padding="@dimen/padding_small"
             android:background="@drawable/circle_blue_drawable"
+            android:padding="@dimen/padding_small"
             android:src="@drawable/ic_add_24"
             app:elevation="@dimen/elevation_small"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -41,9 +46,10 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_margin="@dimen/margin_x_middle"
-            android:padding="@dimen/padding_2x_small"
             android:background="@drawable/circle_white_drawable"
+            android:padding="@dimen/padding_2x_small"
             android:src="@drawable/ic_note"
+            android:visibility="gone"
             app:elevation="@dimen/elevation_small"
             app:layout_constraintBottom_toTopOf="@id/addNoteBtn"
             app:layout_constraintStart_toStartOf="parent" />
@@ -53,14 +59,13 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_margin="@dimen/margin_x_middle"
-            android:padding="@dimen/padding_2x_small"
             android:background="@drawable/circle_white_drawable"
+            android:padding="@dimen/padding_2x_small"
             android:src="@drawable/ic_folder"
+            android:visibility="gone"
             app:elevation="@dimen/elevation_small"
             app:layout_constraintBottom_toTopOf="@id/plusBtn"
             app:layout_constraintStart_toStartOf="parent" />
-
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

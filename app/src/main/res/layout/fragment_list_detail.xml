@@ -25,6 +25,7 @@
             style="@style/AppTheme.TextView.Title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:text="فیلم و سریال"
             app:layout_constraintEnd_toStartOf="@id/listDetailBackBtn"
             app:layout_constraintStart_toEndOf="@id/listDetailMoteOptions"
             app:layout_constraintTop_toTopOf="parent"

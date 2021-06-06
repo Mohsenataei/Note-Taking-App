@@ -12,7 +12,11 @@ import androidx.room.PrimaryKey
 data class Folder(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "index")
-    val id: Long,
+    val id: Int,
+
+    @ColumnInfo(name = "name")
     val name: String,
+
+    @ColumnInfo(name = "create_date")
     val createDate: String
 )
