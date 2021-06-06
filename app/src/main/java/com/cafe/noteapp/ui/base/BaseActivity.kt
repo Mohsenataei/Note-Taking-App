@@ -31,7 +31,6 @@ abstract class BaseActivity<V : BaseViewModel, B : ViewDataBinding> : DaggerAppC
     inline fun <reified T : BaseViewModel> getLazyViewModel(): Lazy<T> =
         lazy {
             ViewModelProvider(this, viewModelFactory).get(T::class.java)
-//            ViewModelProviders.of(this, viewModelFactory)[T::class.java]
         }
 
     override fun onCreate(savedInstanceState: Bundle?) {

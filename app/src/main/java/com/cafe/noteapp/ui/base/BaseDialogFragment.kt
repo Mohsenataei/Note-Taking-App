@@ -9,13 +9,13 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.cafe.noteapp.di.component.DaggerAppComponent
 import javax.inject.Inject
 
 abstract class BaseDialogFragment<V : BaseViewModel, B : ViewDataBinding> : DialogFragment(),
     BaseView<V, B> {
     override lateinit var binding: B
 
-    @Inject
     override lateinit var viewModelFactory: ViewModelProvider.Factory
 
     /**
@@ -25,7 +25,7 @@ abstract class BaseDialogFragment<V : BaseViewModel, B : ViewDataBinding> : Dial
      */
     inline fun <reified T : BaseViewModel> getLazyViewModel(): Lazy<T> =
         lazy {
-            ViewModelProvider(this, viewModelFactory).get(T::class.java)
+            ViewModelProvider(requireActivity(), viewModelFactory).get(T::class.java)
         }
 
     override fun onCreateView(
@@ -33,12 +33,14 @@ abstract class BaseDialogFragment<V : BaseViewModel, B : ViewDataBinding> : Dial
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         // initialize binding
         binding = DataBindingUtil.inflate(inflater, layoutId, container, false)
-        binding.setLifecycleOwner(this)
+        binding.lifecycleOwner = this
 
         // set viewModel as an observer to this activity lifecycle events
         lifecycle.addObserver(viewModel)
+
 
         return binding.root
     }

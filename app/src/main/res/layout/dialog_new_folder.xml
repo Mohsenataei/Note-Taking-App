@@ -8,7 +8,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/shape_white_base_rectangle">
 
         <TextView
             android:id="@+id/newFolderTv"
@@ -35,7 +36,7 @@
             app:layout_constraintTop_toBottomOf="@id/folderNameTv" />
 
         <Button
-            android:id="@+id/createFolderBtn"
+            android:id="@+id/confirm"
             style="@style/AppTheme.Button.Confirm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -49,7 +50,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/cancel"
-            app:layout_constraintStart_toEndOf="@+id/createFolderBtn"
+            app:layout_constraintStart_toEndOf="@+id/confirm"
             app:layout_constraintTop_toBottomOf="@+id/newFolderTitleEd" />
 
 

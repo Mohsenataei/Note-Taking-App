@@ -29,14 +29,11 @@ abstract class BaseFragment<V : BaseViewModel, B : ViewDataBinding> : DaggerFrag
     inline fun <reified T : BaseViewModel> getLazyViewModel(scope: ViewModelScope): Lazy<T> =
         lazy {
             when (scope) {
-                ViewModelScope.ACTIVITY -> ViewModelProviders.of(
-                    requireActivity(),
-                    viewModelFactory
-                )[T::class.java]
-                ViewModelScope.FRAGMENT -> ViewModelProviders.of(
-                    this,
-                    viewModelFactory
-                )[T::class.java]
+                ViewModelScope.ACTIVITY ->
+                    ViewModelProvider(requireActivity(), viewModelFactory).get(T::class.java)
+
+                ViewModelScope.FRAGMENT ->
+                    ViewModelProvider(this, viewModelFactory).get(T::class.java)
             }
         }
 
