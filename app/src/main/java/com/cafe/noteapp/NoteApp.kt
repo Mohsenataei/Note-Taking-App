@@ -1,10 +1,11 @@
 package com.cafe.noteapp
 
+import com.cafe.noteapp.di.component.DaggerAppComponent
 import dagger.android.AndroidInjector
 import dagger.android.DaggerApplication
 
 class NoteApp : DaggerApplication() {
-    override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
-        TODO("Not yet implemented")
-    }
+    override fun applicationInjector(): AndroidInjector<out DaggerApplication> =
+        DaggerAppComponent.factory().create(this)
+
 }
