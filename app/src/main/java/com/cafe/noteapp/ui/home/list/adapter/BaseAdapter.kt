@@ -81,6 +81,9 @@ abstract class BaseAdapter<T : Any, B : ViewDataBinding>(
     override fun onBindViewHolder(holder: BaseViewHolder<T, B>, position: Int) {
         holder.bind(itemBindingId, getItem(position))
         holder.binding.onBind(position)
+        holder.binding.root.setOnClickListener {
+            onItemClicked?.invoke(getItem(position))
+        }
     }
 
     /**

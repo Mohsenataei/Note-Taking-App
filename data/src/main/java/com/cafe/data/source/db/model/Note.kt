@@ -10,7 +10,7 @@ import androidx.room.*
         ForeignKey(
             entity = Folder::class,
             parentColumns = arrayOf("index"),
-            childColumns = arrayOf("creation_date"),
+            childColumns = arrayOf("folderId"),
             onDelete = ForeignKey.CASCADE
         )
     )
