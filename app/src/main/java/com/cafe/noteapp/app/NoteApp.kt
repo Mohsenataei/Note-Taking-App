@@ -1,4 +1,4 @@
-package com.cafe.noteapp
+package com.cafe.noteapp.app
 
 import com.cafe.noteapp.di.component.DaggerAppComponent
 import dagger.android.AndroidInjector

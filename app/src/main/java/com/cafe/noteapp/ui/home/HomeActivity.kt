@@ -1,4 +1,6 @@
 package com.cafe.noteapp.ui.home
 
-class HomeActivity {
+import com.cafe.noteapp.ui.base.BaseActivity
+
+class HomeActivity : BaseActivity {
 }

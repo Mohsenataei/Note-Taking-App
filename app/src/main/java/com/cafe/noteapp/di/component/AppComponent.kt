@@ -1,16 +1,14 @@
 package com.cafe.noteapp.di.component
 
 import android.content.Context
-import com.cafe.noteapp.NoteApp
+import com.cafe.noteapp.app.NoteApp
 import com.cafe.noteapp.di.builder.ActivityBuilder
 import com.cafe.noteapp.di.module.AppModule
 import com.cafe.noteapp.di.module.DataBaseModule
-import dagger.Binds
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjectionModule
 import dagger.android.AndroidInjector
-import dagger.android.DaggerApplication
 import javax.inject.Singleton
 
 
