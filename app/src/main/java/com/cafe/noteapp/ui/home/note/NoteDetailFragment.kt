@@ -46,7 +46,11 @@ class NoteDetailFragment : BaseFragment<NoteDetailViewModel, FragmentNoteDetailB
         }
         val content = binding.noteDetailContent.text.toString()
 
-        viewModel.saveNote(NoteItem(0, content, title, ""))
+        viewModel.saveNote(
+            NoteItem(
+                requireArguments().getInt("folderId", -1), content, title, ""
+            )
+        )
     }
 
     override fun onClick(view: View?) {

@@ -33,7 +33,10 @@ class HomeListFragment : BaseFragment<HomeListViewModel, FragmentHomeListBinding
                 Log.d(TAG, "onViewInitialized: $it")
                 if (it.type == FOLDER) {
                     val destination =
-                        HomeListFragmentDirections.actionHomeListFragmentToListDetailFragment(it.id)
+                        HomeListFragmentDirections.actionHomeListFragmentToListDetailFragment(
+                            it.id,
+                            it.name
+                        )
 //                    destination.folderId = it.id
                     findNaveController().navigate(destination)
                 }

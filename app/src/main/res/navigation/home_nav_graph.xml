@@ -25,9 +25,17 @@
         android:id="@+id/listDetailFragment"
         android:name="com.cafe.noteapp.ui.home.detail.ListDetailFragment"
         tools:layout="@layout/fragment_list_detail">
+
+        <action
+            android:id="@+id/action_list_detail_fragment_to_note_detail_fragment"
+            app:destination="@id/noteDetailFragment" />
         <argument
             android:name="folderId"
             app:argType="integer" />
+
+        <argument
+            android:name="folderName"
+            app:argType="string" />
     </fragment>
 
     <fragment

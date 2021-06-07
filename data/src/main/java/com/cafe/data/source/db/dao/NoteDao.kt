@@ -10,6 +10,9 @@ interface NoteDao {
     @Query("SELECT * FROM notes")
     suspend fun getNotes(): List<Note>
 
+    @Query("SELECT * FROM notes WHERE folderId = :folderId")
+    suspend fun getNotesInFolder(folderId: String): List<Note>
+
     @Query("SELECT * FROM notes WHERE creation_date = :creationDate")
     suspend fun getNoteById(creationDate: String): Note
 

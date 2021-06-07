@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tool="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
+        <variable
+            name="adapter"
+            type="com.cafe.noteapp.ui.home.list.adapter.MultiLayoutAdapter" />
 
     </data>
 
@@ -30,7 +34,19 @@
             app:layout_constraintEnd_toStartOf="@id/listDetailBackBtn"
             app:layout_constraintStart_toEndOf="@id/listDetailMoteOptions"
             app:layout_constraintTop_toTopOf="parent"
-            tool:text="فیلم و سریال" />
+            tools:text="فیلم و سریال" />
+
+        <ImageView
+            android:id="@+id/plusBtn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_margin="@dimen/margin_x_middle"
+            android:background="@drawable/circle_blue_drawable"
+            android:padding="@dimen/padding_small"
+            android:src="@drawable/ic_add_24"
+            app:elevation="@dimen/elevation_small"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <ImageView
             android:id="@+id/listDetailMoteOptions"
@@ -41,5 +57,14 @@
             app:layout_constraintBottom_toBottomOf="@+id/listDetailTitle"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/listDetailTitle" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:adapter="@{adapter}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/listDetailBackBtn"
+            tools:listitem="@layout/list_row_item" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
