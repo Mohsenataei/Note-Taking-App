@@ -46,4 +46,8 @@ class NoteRepository @Inject constructor(
     suspend fun getAllFolders(): Either<Error, List<Folder>> {
         return safeCall { folderDao.getAllFolders() }
     }
+
+    suspend fun updateFolder(folder: Folder): Either<Error, Int> {
+        return safeCall { folderDao.update(folder) }
+    }
 }

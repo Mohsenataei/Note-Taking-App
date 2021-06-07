@@ -6,7 +6,7 @@ data class NoteItem(
     val id: Int?,
     val content: String,
     val title: String,
-    val created_data: String
+    val created_data: Long
 )
 
 fun mapToNoteItems(notes: List<Note>): List<NoteItem> {
@@ -31,6 +31,7 @@ fun mapToNoteItem(notes: Note): NoteItem {
 
 fun mapToNote(noteItem: NoteItem): Note {
     return Note(
+        index = null,
         folderId = noteItem.id?.toString(),
         contents = noteItem.content,
         title = noteItem.title,

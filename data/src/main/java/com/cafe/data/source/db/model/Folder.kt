@@ -18,5 +18,10 @@ data class Folder(
     val name: String,
 
     @ColumnInfo(name = "create_date")
-    val createDate: String
+    val createDate: Long
 )
+// expected
+// create_date=Column{name='create_date', type='TEXT', affinity='2', notNull=true, primaryKeyPosition=0, defaultValue='null'}
+
+// found
+// create_date=Column{name='create_date', type='BIGINT', affinity='3', notNull=true, primaryKeyPosition=0, defaultValue='null'}

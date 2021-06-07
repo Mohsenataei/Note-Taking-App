@@ -2,7 +2,6 @@ package com.cafe.noteapp.ui.home.list
 
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.core.view.isVisible
 import com.cafe.noteapp.R
 import com.cafe.noteapp.databinding.FragmentHomeListBinding
@@ -47,7 +46,7 @@ class HomeListFragment : BaseFragment<HomeListViewModel, FragmentHomeListBinding
             binding.adapter?.swapItems(it)
         }
 
-        viewModel.loadingLiveData.observeSafe(viewLifecycleOwner) {
+        viewModel.loadingVisibility.observeSafe(viewLifecycleOwner) {
             binding.loading.isVisible = it
         }
 
@@ -86,7 +85,7 @@ class HomeListFragment : BaseFragment<HomeListViewModel, FragmentHomeListBinding
             R.id.addNoteBtn -> {
                 findNaveController().navigate(
                     HomeListFragmentDirections.actionHomeListFragmentToNoteDetailFragment(
-                        -1
+                        0
                     )
                 )
             }

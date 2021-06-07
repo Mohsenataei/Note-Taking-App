@@ -33,7 +33,8 @@ class ListDetailFragment : BaseFragment<ListDetailViewModel, FragmentListDetailB
                 Log.d(HomeListViewModel.TAG, "onViewInitialized: $it")
 //                if (it.type == HomeListViewModel.FOLDER) {
 //                    val destination =
-//                        HomeListFragmentDirections.actionHomeListFragmentToListDetailFragment(
+//                        HomeListFragmentDirections.actionHomeListFra
+            //                        gmentToListDetailFragment(
 //                            it.id,
 //                            it.name
 //                        )

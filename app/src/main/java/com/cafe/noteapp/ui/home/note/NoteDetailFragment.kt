@@ -48,7 +48,7 @@ class NoteDetailFragment : BaseFragment<NoteDetailViewModel, FragmentNoteDetailB
 
         viewModel.saveNote(
             NoteItem(
-                requireArguments().getInt("folderId", -1), content, title, ""
+                requireArguments().getInt("folderId", 0), content, title, 0
             )
         )
     }

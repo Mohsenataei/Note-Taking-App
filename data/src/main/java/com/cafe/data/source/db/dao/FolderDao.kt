@@ -18,6 +18,9 @@ interface FolderDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertOrUpdate(folder: Folder): Long
 
+    @Update(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun update(folder: Folder): Int
+
     @Query("SELECT * FROM notes WHERE folderId = :id")
     suspend fun getAllNotesInFolder(id: Long): List<Note>
 }

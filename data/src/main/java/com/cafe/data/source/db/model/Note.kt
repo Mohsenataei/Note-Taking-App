@@ -5,7 +5,7 @@ import androidx.room.*
 
 @Entity(
     tableName = "notes",
-    indices = [Index("creation_date")],
+    indices = [Index("index")],
     foreignKeys = arrayOf(
         ForeignKey(
             entity = Folder::class,
@@ -17,8 +17,9 @@ import androidx.room.*
 )
 data class Note(
     @PrimaryKey
+    val index: Int?,
     @ColumnInfo(name = "creation_date")
-    val creationDate: String,
+    val creationDate: Long,
     val contents: String,
     val title: String,
     val folderId: String? = null

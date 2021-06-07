@@ -13,9 +13,9 @@ import com.cafe.data.source.repository.notes.NoteRepository
 import com.cafe.noteapp.R
 import com.cafe.noteapp.ui.base.BaseViewModel
 import com.cafe.noteapp.ui.home.dialog.FolderItem
+import com.cafe.noteapp.util.livedata.CombinedLiveData
 import com.cafe.noteapp.util.livedata.NonNullLiveData
 import com.cafe.noteapp.util.provider.BaseResourceProvider
-import com.cafe.noteapp.util.provider.ResourceProvider
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -25,31 +25,32 @@ class HomeListViewModel @Inject constructor(
 ) : BaseViewModel() {
 
     private val _allNotes = NonNullLiveData<List<NoteItem>>(emptyList())
-    val allNote: LiveData<List<NoteItem>>
+    val allNotes: LiveData<List<NoteItem>>
         get() = _allNotes
 
-    private val _loadingLiveData = NonNullLiveData<Boolean>(false)
-    val loadingLiveData: LiveData<Boolean>
-        get() = _loadingLiveData
+    private val _loadingVisibility = NonNullLiveData<Boolean>(false)
+    val loadingVisibility: LiveData<Boolean>
+        get() = _loadingVisibility
 
     private val _allFolders = NonNullLiveData<List<FolderItem>>(emptyList())
     val allFolders: LiveData<List<FolderItem>>
         get() = _allFolders
 
     private val _ListItemLiveData = MediatorLiveData<List<ListItem>>().apply {
+        addSource(_allFolders) {
+            value = mapFoldersToListItem(it)
+        }
+
         addSource(_allNotes) {
             value = mapNotesToListItem(it)
         }
 
-        addSource(_allFolders) {
-            value = mapFoldersToListItem(it)
-        }
     }
     val listItemLiveData: LiveData<List<ListItem>>
         get() = _ListItemLiveData
 
 
-    fun refreshList() {
+    private fun refreshList() {
         getAllNotes()
         getAllFolders()
     }
@@ -58,16 +59,17 @@ class HomeListViewModel @Inject constructor(
         refreshList()
     }
 
-    fun getAllNotes() {
-        _loadingLiveData.value = false
+    private fun getAllNotes() {
         viewModelScope.launch {
+            _loadingVisibility.value = true
+
             when (val result = noteRepository.getAllNotes()) {
                 is Right -> {
-                    _loadingLiveData.value = true
+                    _loadingVisibility.value = false
                     _allNotes.value = mapToNoteItem(result.b)
                 }
                 is Left -> {
-                    _loadingLiveData.value = true
+                    _loadingVisibility.value = false
                     showError(result.a)
                 }
             }
@@ -85,16 +87,16 @@ class HomeListViewModel @Inject constructor(
         }
     }
 
-    fun getAllFolders() {
-        _loadingLiveData.value = false
+    private fun getAllFolders() {
         viewModelScope.launch {
+            _loadingVisibility.value = true
             when (val result = noteRepository.getAllFolders()) {
                 is Right -> {
-                    _loadingLiveData.value = false
+                    _loadingVisibility.value = false
                     _allFolders.value = mapToFolderItem(result.b)
                 }
                 is Left -> {
-                    _loadingLiveData.value = false
+                    _loadingVisibility.value = false
                     showError(result.a)
                 }
             }
@@ -102,20 +104,19 @@ class HomeListViewModel @Inject constructor(
     }
 
     fun insertNewFolder(newFolder: FolderItem) {
-        _loadingLiveData.value = false
+        _loadingVisibility.value = true
         viewModelScope.launch {
             when (val result = noteRepository.insertNewFolder(mapToFolder(newFolder))) {
                 is Right -> {
-                    _loadingLiveData.value = true
+                    _loadingVisibility.value = false
                     refreshList()
                 }
                 is Left -> {
-                    _loadingLiveData.value = true
+                    _loadingVisibility.value = false
                     showError(result.a)
                 }
             }
         }
-
     }
 
     private fun showError(error: Error) {
@@ -132,6 +133,8 @@ class HomeListViewModel @Inject constructor(
                 folderName = folder.name,
                 createDate = folder.createDate
             )
+        }.filter {
+            it.id != 0
         }
     }
 
@@ -140,7 +143,7 @@ class HomeListViewModel @Inject constructor(
             ListItem(
                 id = it.id ?: -1,
                 name = it.title,
-                description = it.created_data,
+                description = it.created_data.toString(),
                 type = NOTE,
                 icon = resourceProvider.getDrawable(R.drawable.ic_note_blue),
                 iconBackground = resourceProvider.getDrawable(R.drawable.circle_light_blue_bg)
