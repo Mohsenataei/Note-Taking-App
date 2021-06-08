@@ -38,9 +38,9 @@ class NoteRepository @Inject constructor(
         return safeCall { noteDao.getNotesInFolder(folderId) }
     }
 
-    suspend fun getNoteById(creationDate: String): Either<Error, Note> {
+    suspend fun getNoteById(id: Int): Either<Error, Note> {
 
-        return safeCall { noteDao.getNoteById(creationDate) }
+        return safeCall { noteDao.getNoteById(id) }
     }
 
     suspend fun insertNewFolder(folder: Folder): Either<Error, Long> {

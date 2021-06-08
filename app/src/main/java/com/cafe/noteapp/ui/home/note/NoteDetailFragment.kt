@@ -1,5 +1,6 @@
 package com.cafe.noteapp.ui.home.note
 
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.core.view.isVisible
@@ -14,6 +15,7 @@ import com.cafe.noteapp.util.extentions.observeSafe
 
 class NoteDetailFragment : BaseFragment<NoteDetailViewModel, FragmentNoteDetailBinding>(),
         View.OnClickListener {
+    val TAG = this::class.java.simpleName
     override val viewModel: NoteDetailViewModel by getLazyViewModel(ViewModelScope.FRAGMENT)
     override val layoutId: Int = R.layout.fragment_note_detail
 
@@ -21,6 +23,10 @@ class NoteDetailFragment : BaseFragment<NoteDetailViewModel, FragmentNoteDetailB
         super.onViewInitialized(binding)
         initClicks()
         initObservers()
+
+        viewModel.savedNoteItem.observeSafe(viewLifecycleOwner) {
+            binding.note = it
+        }
     }
 
     private fun initClicks() {
@@ -32,15 +38,21 @@ class NoteDetailFragment : BaseFragment<NoteDetailViewModel, FragmentNoteDetailB
             binding.noteLading.isVisible = it
         }
 
+        (requireArguments().getInt("noteId", 0)).takeIf { it != 0 }?.let {
+            viewModel.getNoteById(it)
+        }
+
         viewModel.isInsertionDone.observeSafe(viewLifecycleOwner) { isDone ->
             if (isDone)
                 findNaveController().popBackStack()
         }
+
+
     }
 
     private fun saveNote() {
         val title = binding.noteDetailTitle.text.toString()
-        if (title.isNullOrEmpty()) {
+        if (title.isEmpty()) {
             Toast.makeText(context, "لطفا عنوان یادداشت خود را وارد کنید", Toast.LENGTH_SHORT)
                     .show()
             return
@@ -49,7 +61,7 @@ class NoteDetailFragment : BaseFragment<NoteDetailViewModel, FragmentNoteDetailB
 
         viewModel.saveNote(
                 NoteItem(
-                        requireArguments().getInt("folderId", 0), content, title, DateHelper.getCurrentDateInMilli()
+                        0, requireArguments().getInt("folderId", 0), content, title, DateHelper.getCurrentDateInMilli()
                 )
         )
     }

@@ -22,15 +22,20 @@ class ListDetailFragment : BaseFragment<ListDetailViewModel, FragmentListDetailB
     override fun onViewInitialized(binding: FragmentListDetailBinding) {
         super.onViewInitialized(binding)
         initClicks()
+        viewModel.currentFolderId = requireArguments().getInt("folderId", -1)
         binding.listDetailTitle.text = requireArguments().getString("folderName", "نام پوشه")
         viewModel.getAllNotes(
-                requireArguments().getInt("folderId", -1).toString()
+                viewModel.currentFolderId.toString()
         )
 
         binding.adapter = MultiLayoutAdapter<ListItem, ListRowItemBinding>(
                 layoutId = R.layout.list_row_item,
                 onItemClicked = {
-                    Log.d(HomeListViewModel.TAG, "onViewInitialized: $it")
+                    findNaveController()
+                            .navigate(ListDetailFragmentDirections.actionListDetailFragmentToNoteDetailFragment(
+                                    viewModel.currentFolderId,
+                                    it.id
+                            ))
 
                 }
         )
@@ -56,7 +61,8 @@ class ListDetailFragment : BaseFragment<ListDetailViewModel, FragmentListDetailB
             R.id.addNewNote -> {
                 findNaveController().navigate(
                         ListDetailFragmentDirections.actionListDetailFragmentToNoteDetailFragment(
-                                requireArguments().getInt("folderId", -1)
+                                requireArguments().getInt("folderId", -1),
+                                0
                         )
                 )
             }

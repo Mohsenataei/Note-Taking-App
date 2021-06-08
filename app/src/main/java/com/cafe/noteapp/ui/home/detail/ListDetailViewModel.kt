@@ -2,9 +2,7 @@ package com.cafe.noteapp.ui.home.detail
 
 import android.util.Log
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.viewModelScope
-import arrow.core.Either
 import arrow.core.Either.Left
 import arrow.core.Either.Right
 import com.cafe.data.source.mapper.Error
@@ -29,6 +27,7 @@ class ListDetailViewModel @Inject constructor(
     val allNotesLiveData: LiveData<List<ListItem>>
         get() = _allNotesLiveData
 
+    var currentFolderId: Int = 0
 
     fun getAllNotes(folderId: String) {
         viewModelScope.launch {

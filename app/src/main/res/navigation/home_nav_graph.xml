@@ -45,6 +45,10 @@
         <argument
             android:name="folderId"
             app:argType="integer" />
+
+        <argument
+            android:name="noteId"
+            app:argType="integer" />
     </fragment>
 
 

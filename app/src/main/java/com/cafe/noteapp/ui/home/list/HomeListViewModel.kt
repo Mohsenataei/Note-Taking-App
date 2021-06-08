@@ -2,7 +2,6 @@ package com.cafe.noteapp.ui.home.list
 
 import android.util.Log
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.viewModelScope
 import arrow.core.Either.Left
 import arrow.core.Either.Right
@@ -14,7 +13,6 @@ import com.cafe.data.source.repository.notes.NoteRepository
 import com.cafe.noteapp.R
 import com.cafe.noteapp.ui.base.BaseViewModel
 import com.cafe.noteapp.ui.home.dialog.FolderItem
-import com.cafe.noteapp.util.livedata.CombinedLiveData
 import com.cafe.noteapp.util.livedata.NonNullLiveData
 import com.cafe.noteapp.util.provider.BaseResourceProvider
 import kotlinx.coroutines.launch
