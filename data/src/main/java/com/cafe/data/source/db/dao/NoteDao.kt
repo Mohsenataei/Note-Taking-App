@@ -19,6 +19,9 @@ interface NoteDao {
     @Delete
     suspend fun deleteNote(note: Note)
 
+    @Query("SELECT * from notes WHERE folderId = 0")
+    suspend fun getOrphanNotes(): List<Note>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertOrUpdate(note: Note): Long
 }

@@ -25,25 +25,17 @@ class ListDetailViewModel @Inject constructor(
         private val resourceProvider: BaseResourceProvider
 ) : BaseViewModel() {
 
-    private val _allNotesLiveData = NonNullLiveData<List<NoteItem>>(emptyList())
-    val allNotesLiveData: LiveData<List<NoteItem>>
+    private val _allNotesLiveData = NonNullLiveData<List<ListItem>>(emptyList())
+    val allNotesLiveData: LiveData<List<ListItem>>
         get() = _allNotesLiveData
-
-    private val _allNotesListItemLiveData = MediatorLiveData<List<ListItem>>().apply {
-//        addSource(allNotesLiveData) {
-//            value = mapNotesToListItem(it)
-//        }
-    }
-
-    val allNotesListItemLiveData: LiveData<List<ListItem>>
-        get() = _allNotesListItemLiveData
 
 
     fun getAllNotes(folderId: String) {
         viewModelScope.launch {
             when (val result = noteRepository.getNotesInFolder(folderId)) {
                 is Right -> {
-                    _allNotesLiveData.value = mapToNoteItems(result.b)
+                    // TODO: 6/8/21 fix this mess later
+                    _allNotesLiveData.value = mapNotesToListItem(mapToNoteItems(result.b))
                 }
                 is Left -> {
                     showError(result.a)

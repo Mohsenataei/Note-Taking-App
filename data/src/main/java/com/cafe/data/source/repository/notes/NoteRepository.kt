@@ -55,12 +55,16 @@ class NoteRepository @Inject constructor(
         return safeCall { folderDao.update(folder) }
     }
 
+    suspend fun getOrphanNotes(): Either<Error, List<Note>> {
+        return safeCall { noteDao.getOrphanNotes() }
+    }
+
     // new approach
 
     suspend fun getListItem(): Either<Error, List<File>> {
         var notes: MutableList<Note>? = null
         var folders: List<Folder>? = null
-        when (val result = getAllNotes()) {
+        when (val result = getOrphanNotes()) {
             is Left -> return result
             is Right -> notes = result.b.toMutableList()
         }

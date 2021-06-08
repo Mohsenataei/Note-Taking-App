@@ -36,15 +36,13 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="فیلم و سریال" />
 
-        <ImageView
-            android:id="@+id/plusBtn"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/addNewNote"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_x_middle"
-            android:background="@drawable/circle_blue_drawable"
-            android:padding="@dimen/padding_small"
             android:src="@drawable/ic_add_24"
-            app:elevation="@dimen/elevation_small"
+            android:padding="@dimen/padding_small"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 

@@ -15,7 +15,7 @@ import com.cafe.noteapp.util.extentions.findNaveController
 import com.cafe.noteapp.util.extentions.observeSafe
 
 class ListDetailFragment : BaseFragment<ListDetailViewModel, FragmentListDetailBinding>(),
-    View.OnClickListener {
+        View.OnClickListener {
     override val viewModel: ListDetailViewModel by getLazyViewModel(ViewModelScope.FRAGMENT)
     override val layoutId: Int = R.layout.fragment_list_detail
 
@@ -24,27 +24,18 @@ class ListDetailFragment : BaseFragment<ListDetailViewModel, FragmentListDetailB
         initClicks()
         binding.listDetailTitle.text = requireArguments().getString("folderName", "نام پوشه")
         viewModel.getAllNotes(
-            requireArguments().getInt("folderId", -1).toString()
+                requireArguments().getInt("folderId", -1).toString()
         )
 
         binding.adapter = MultiLayoutAdapter<ListItem, ListRowItemBinding>(
-            layoutId = R.layout.list_row_item,
-            onItemClicked = {
-                Log.d(HomeListViewModel.TAG, "onViewInitialized: $it")
-//                if (it.type == HomeListViewModel.FOLDER) {
-//                    val destination =
-//                        HomeListFragmentDirections.actionHomeListFra
-            //                        gmentToListDetailFragment(
-//                            it.id,
-//                            it.name
-//                        )
-////                    destination.folderId = it.id
-//                    findNaveController().navigate(destination)
-//                }
-            }
+                layoutId = R.layout.list_row_item,
+                onItemClicked = {
+                    Log.d(HomeListViewModel.TAG, "onViewInitialized: $it")
+
+                }
         )
 
-        viewModel.allNotesListItemLiveData.observeSafe(viewLifecycleOwner) {
+        viewModel.allNotesLiveData.observeSafe(viewLifecycleOwner) {
             binding.adapter?.swapItems(it)
             Log.d(TAG, "onViewInitialized: $it")
         }
@@ -53,7 +44,7 @@ class ListDetailFragment : BaseFragment<ListDetailViewModel, FragmentListDetailB
 
     private fun initClicks() {
         binding.listDetailBackBtn.setOnClickListener(this)
-        binding.plusBtn.setOnClickListener(this)
+        binding.addNewNote.setOnClickListener(this)
     }
 
     override fun onClick(view: View?) {
@@ -62,11 +53,11 @@ class ListDetailFragment : BaseFragment<ListDetailViewModel, FragmentListDetailB
                 findNaveController().popBackStack()
             }
 
-            R.id.plusBtn -> {
+            R.id.addNewNote -> {
                 findNaveController().navigate(
-                    ListDetailFragmentDirections.actionListDetailFragmentToNoteDetailFragment(
-                        requireArguments().getInt("folderId", -1)
-                    )
+                        ListDetailFragmentDirections.actionListDetailFragmentToNoteDetailFragment(
+                                requireArguments().getInt("folderId", -1)
+                        )
                 )
             }
 
