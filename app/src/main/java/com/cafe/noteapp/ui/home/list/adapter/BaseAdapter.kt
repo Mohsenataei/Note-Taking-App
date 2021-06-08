@@ -92,8 +92,8 @@ abstract class BaseAdapter<T : Any, B : ViewDataBinding>(
      */
     open fun swapItems(newItems: List<T>) {
         val diffResult = DiffUtil.calculateDiff(object : DiffUtil.Callback() {
-            override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean = true
-//                items[oldItemPosition] == newItems[newItemPosition]
+            override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean =
+                items[oldItemPosition] == newItems[newItemPosition]
 
             override fun getOldListSize(): Int =
                 items.size
@@ -107,5 +107,10 @@ abstract class BaseAdapter<T : Any, B : ViewDataBinding>(
         diffResult.dispatchUpdatesTo(this)
         items.clear()
         items.addAll(newItems)
+    }
+
+    open fun setItems(newItems: List<T>) {
+        items.addAll(newItems)
+        notifyDataSetChanged()
     }
 }

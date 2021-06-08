@@ -52,6 +52,7 @@ class HomeListFragment : BaseFragment<HomeListViewModel, FragmentHomeListBinding
 
     }
 
+
     private fun initView() {
         binding.plusBtn.setOnClickListener(this)
         binding.addNoteBtn.setOnClickListener(this)

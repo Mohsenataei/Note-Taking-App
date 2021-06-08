@@ -1,8 +1,12 @@
 package com.cafe.data.source.repository.notes
 
+import android.content.Context
 import arrow.core.Either
+import arrow.core.Either.Left
+import arrow.core.Either.Right
 import com.cafe.data.source.db.dao.FolderDao
 import com.cafe.data.source.db.dao.NoteDao
+import com.cafe.data.source.db.model.File
 import com.cafe.data.source.db.model.Folder
 import com.cafe.data.source.db.model.Note
 import com.cafe.data.source.mapper.Error
@@ -11,9 +15,9 @@ import com.cafe.data.source.repository.BaseRepository
 import javax.inject.Inject
 
 class NoteRepository @Inject constructor(
-    errorMapper: ErrorMapper,
-    private val noteDao: NoteDao,
-    private val folderDao: FolderDao
+        errorMapper: ErrorMapper,
+        private val noteDao: NoteDao,
+        private val folderDao: FolderDao
 ) : BaseRepository(errorMapper) {
 
     suspend fun getAllNotes(): Either<Error, List<Note>> {
@@ -49,5 +53,49 @@ class NoteRepository @Inject constructor(
 
     suspend fun updateFolder(folder: Folder): Either<Error, Int> {
         return safeCall { folderDao.update(folder) }
+    }
+
+    // new approach
+
+    suspend fun getListItem(): Either<Error, List<File>> {
+        var notes: MutableList<Note>? = null
+        var folders: List<Folder>? = null
+        when (val result = getAllNotes()) {
+            is Left -> return result
+            is Right -> notes = result.b.toMutableList()
+        }
+
+        when (val result = getAllFolders()) {
+            is Left -> return result
+            is Right -> folders = result.b
+        }
+
+        val listItem = notes.map {
+            File(
+                    id = it.index ?: -1,
+                    name = it.title,
+                    description = null,
+                    type = "NOTE",
+                    createdData = it.creationDate
+            )
+        }.toMutableList()
+                .apply {
+                    folders.map {
+                        File(
+                                id = it.id.toInt(),
+                                name = it.name,
+                                description = "حاوی ${folders.size} یادداشت ",
+                                type = "FOLDER",
+                                createdData = it.createDate
+                        )
+                    }.let {
+                        this?.addAll(
+                                it
+                        )
+                    }
+                }.sortedWith(compareByDescending { it.createdData })
+
+        return Either.right(listItem)
+
     }
 }

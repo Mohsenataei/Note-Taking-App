@@ -8,11 +8,12 @@ import com.cafe.noteapp.databinding.FragmentNoteDetailBinding
 import com.cafe.noteapp.ui.base.BaseFragment
 import com.cafe.noteapp.ui.base.ViewModelScope
 import com.cafe.noteapp.ui.home.list.NoteItem
+import com.cafe.noteapp.util.DateHelper
 import com.cafe.noteapp.util.extentions.findNaveController
 import com.cafe.noteapp.util.extentions.observeSafe
 
 class NoteDetailFragment : BaseFragment<NoteDetailViewModel, FragmentNoteDetailBinding>(),
-    View.OnClickListener {
+        View.OnClickListener {
     override val viewModel: NoteDetailViewModel by getLazyViewModel(ViewModelScope.FRAGMENT)
     override val layoutId: Int = R.layout.fragment_note_detail
 
@@ -41,15 +42,15 @@ class NoteDetailFragment : BaseFragment<NoteDetailViewModel, FragmentNoteDetailB
         val title = binding.noteDetailTitle.text.toString()
         if (title.isNullOrEmpty()) {
             Toast.makeText(context, "لطفا عنوان یادداشت خود را وارد کنید", Toast.LENGTH_SHORT)
-                .show()
+                    .show()
             return
         }
         val content = binding.noteDetailContent.text.toString()
 
         viewModel.saveNote(
-            NoteItem(
-                requireArguments().getInt("folderId", 0), content, title, 0
-            )
+                NoteItem(
+                        requireArguments().getInt("folderId", 0), content, title, DateHelper.getCurrentDateInMilli()
+                )
         )
     }
 

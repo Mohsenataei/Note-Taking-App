@@ -12,24 +12,25 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
 import com.cafe.noteapp.R
 import com.cafe.noteapp.databinding.DialogNewFolderBinding
+import com.cafe.noteapp.util.DateHelper
 
 
 class NewFolderDialog(
-    val onConfirm: (FolderItem) -> Unit,
-    val onCancel: () -> Unit
+        val onConfirm: (FolderItem) -> Unit,
+        val onCancel: () -> Unit
 ) : DialogFragment() {
     private lateinit var binding: DialogNewFolderBinding
 
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
 
         // initialize binding
         binding =
-            DataBindingUtil.inflate(inflater, R.layout.dialog_new_folder, container, false)
+                DataBindingUtil.inflate(inflater, R.layout.dialog_new_folder, container, false)
         binding.lifecycleOwner = this
 
         if (dialog != null && dialog!!.window != null) {
@@ -47,10 +48,10 @@ class NewFolderDialog(
 
             if (folderName.isNullOrEmpty())
                 Toast.makeText(requireContext(), "لطفا نام پوشه را وارد کنید", Toast.LENGTH_SHORT)
-                    .show()
+                        .show()
             else {
                 this.dismiss()
-                onConfirm.invoke(FolderItem(0, folderName, 0))
+                onConfirm.invoke(FolderItem(0, folderName, DateHelper.getCurrentDateInMilli()))
             }
         }
         binding.cancel.setOnClickListener {

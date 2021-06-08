@@ -21,8 +21,8 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class ListDetailViewModel @Inject constructor(
-    private val noteRepository: NoteRepository,
-    private val resourceProvider: BaseResourceProvider
+        private val noteRepository: NoteRepository,
+        private val resourceProvider: BaseResourceProvider
 ) : BaseViewModel() {
 
     private val _allNotesLiveData = NonNullLiveData<List<NoteItem>>(emptyList())
@@ -30,9 +30,9 @@ class ListDetailViewModel @Inject constructor(
         get() = _allNotesLiveData
 
     private val _allNotesListItemLiveData = MediatorLiveData<List<ListItem>>().apply {
-        addSource(allNotesLiveData) {
-            value = mapNotesToListItem(it)
-        }
+//        addSource(allNotesLiveData) {
+//            value = mapNotesToListItem(it)
+//        }
     }
 
     val allNotesListItemLiveData: LiveData<List<ListItem>>
@@ -55,12 +55,13 @@ class ListDetailViewModel @Inject constructor(
     private fun mapNotesToListItem(notes: List<NoteItem>): List<ListItem> {
         return notes.map {
             ListItem(
-                id = it.id ?: -1,
-                name = it.title,
-                description = it.created_data.toString(),
-                type = HomeListViewModel.NOTE,
-                icon = resourceProvider.getDrawable(R.drawable.ic_note_blue),
-                iconBackground = resourceProvider.getDrawable(R.drawable.circle_light_blue_bg)
+                    id = it.id ?: -1,
+                    name = it.title,
+                    description = it.created_data.toString(),
+                    type = HomeListViewModel.NOTE,
+                    createDate = 0,
+                    icon = resourceProvider.getDrawable(R.drawable.ic_note_blue),
+                    iconBackground = resourceProvider.getDrawable(R.drawable.circle_light_blue_bg)
             )
         }
     }
