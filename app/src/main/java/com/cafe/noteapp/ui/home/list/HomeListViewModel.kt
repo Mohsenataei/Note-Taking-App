@@ -19,8 +19,8 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class HomeListViewModel @Inject constructor(
-        private val noteRepository: NoteRepository,
-        private val resourceProvider: BaseResourceProvider
+    private val noteRepository: NoteRepository,
+    private val resourceProvider: BaseResourceProvider
 ) : BaseViewModel() {
 
     private val _allNotes = NonNullLiveData<List<NoteItem>>(emptyList())
@@ -35,16 +35,6 @@ class HomeListViewModel @Inject constructor(
     val allFolders: LiveData<List<FolderItem>>
         get() = _allFolders
 
-    //    private val _ListItemLiveData = MediatorLiveData<List<ListItem>>().apply {
-//        addSource(_allFolders) {
-//            value = mapFoldersToListItem(it)
-//        }
-//
-//        addSource(_allNotes) {
-//            value = mapNotesToListItem(it)
-//        }
-//
-//    }
     private val _listItemLiveData = NonNullLiveData<List<ListItem>>(emptyList())
     val listItemLiveData: LiveData<List<ListItem>>
         get() = _listItemLiveData
@@ -78,10 +68,10 @@ class HomeListViewModel @Inject constructor(
     private fun mapToNoteItem(notes: List<Note>): List<NoteItem> {
         return notes.map {
             NoteItem(
-                    id = it.folderId?.toInt(),
-                    content = it.contents,
-                    title = it.title,
-                    created_data = it.creationDate
+                id = it.folderId?.toInt(),
+                content = it.contents,
+                title = it.title,
+                created_data = it.creationDate
             )
         }
     }
@@ -123,14 +113,14 @@ class HomeListViewModel @Inject constructor(
     }
 
     private fun mapToFolder(folderItem: FolderItem) =
-            Folder(0, folderItem.folderName, folderItem.createDate)
+        Folder(0, folderItem.folderName, folderItem.createDate)
 
     private fun mapToFolderItem(folders: List<Folder>): List<FolderItem> {
         return folders.map { folder ->
             FolderItem(
-                    id = folder.id.toInt(),
-                    folderName = folder.name,
-                    createDate = folder.createDate
+                id = folder.id.toInt(),
+                folderName = folder.name,
+                createDate = folder.createDate
             )
         }.filter {
             it.id != 0
@@ -165,9 +155,16 @@ class HomeListViewModel @Inject constructor(
 
     fun getFiles() {
         viewModelScope.launch {
+            _loadingVisibility.value = true
             when (val result = noteRepository.getListItem()) {
-                is Right -> _listItemLiveData.value = mapFilesToListItem(result.b)
-                is Left -> showError(result.a)
+                is Right -> {
+                    _loadingVisibility.value = false
+                    _listItemLiveData.value = mapFilesToListItem(result.b)
+                }
+                is Left -> {
+                    _loadingVisibility.value = false
+                    showError(result.a)
+                }
             }
         }
     }
@@ -175,13 +172,17 @@ class HomeListViewModel @Inject constructor(
     private fun mapFilesToListItem(files: List<File>): List<ListItem> {
         return files.map {
             ListItem(
-                    id = it.id,
-                    name = it.name,
-                    type = it.type,
-                    description = it.description,
-                    createDate = it.createdData,
-                    icon = if (it.type == NOTE) resourceProvider.getDrawable(R.drawable.ic_note_blue) else resourceProvider.getDrawable(R.drawable.ic_folder_orange),
-                    iconBackground = if (it.type == NOTE) resourceProvider.getDrawable(R.drawable.circle_light_blue_bg) else resourceProvider.getDrawable(R.drawable.circle_light_orange_bg)
+                id = it.id,
+                name = it.name,
+                type = it.type,
+                description = it.description,
+                createDate = it.createdData,
+                icon = if (it.type == NOTE) resourceProvider.getDrawable(R.drawable.ic_note_blue) else resourceProvider.getDrawable(
+                    R.drawable.ic_folder_orange
+                ),
+                iconBackground = if (it.type == NOTE) resourceProvider.getDrawable(R.drawable.circle_light_blue_bg) else resourceProvider.getDrawable(
+                    R.drawable.circle_light_orange_bg
+                )
             )
         }.filter { it.id != 0 }
     }

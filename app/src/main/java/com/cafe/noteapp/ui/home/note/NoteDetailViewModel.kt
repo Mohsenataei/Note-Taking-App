@@ -18,7 +18,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class NoteDetailViewModel @Inject constructor(
-        private val noteRepository: NoteRepository
+    private val noteRepository: NoteRepository
 ) : BaseViewModel() {
 
     val isInsertionDone = SingleEventLiveData<Boolean>().apply { value = false }
@@ -30,15 +30,19 @@ class NoteDetailViewModel @Inject constructor(
     val savedNoteItem: LiveData<NoteItem>
         get() = _savedNoteLiveData
 
+    var currentFolerId = -1
     fun saveNote(noteItem: NoteItem) {
-        _noteLoadingLiveData.value = false
+        _noteLoadingLiveData.value = true
         viewModelScope.launch {
             when (val result = noteRepository.insertNote(mapToNote(noteItem))) {
                 is Right -> {
-                    _noteLoadingLiveData.value = true
+                    _noteLoadingLiveData.value = false
                     isInsertionDone.value = true
                 }
-                is Left -> showError(result.a)
+                is Left -> {
+                    _noteLoadingLiveData.value = false
+                    showError(result.a)
+                }
             }
         }
     }

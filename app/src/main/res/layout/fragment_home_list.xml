@@ -33,7 +33,6 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:translationZ="20dp"
-            android:visibility="gone"
             app:matProg_barColor="@color/colorPrimary"
             app:matProg_progressIndeterminate="true" />
 

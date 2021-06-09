@@ -14,8 +14,8 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_small"
         android:layout_marginStart="@dimen/margin_x_middle"
+        android:layout_marginTop="@dimen/margin_small"
         android:layout_marginEnd="@dimen/margin_x_middle"
         app:cardCornerRadius="@dimen/radius_x_small">
 
@@ -40,6 +40,8 @@
                 style="@style/AppTheme.TextView.RowTitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
                 android:text="@{item.name}"
                 app:layout_constraintEnd_toStartOf="@id/icon"
                 app:layout_constraintStart_toEndOf="@id/moreOptions"

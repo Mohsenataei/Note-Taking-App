@@ -14,7 +14,7 @@ import com.cafe.noteapp.util.extentions.findNaveController
 import com.cafe.noteapp.util.extentions.observeSafe
 
 class NoteDetailFragment : BaseFragment<NoteDetailViewModel, FragmentNoteDetailBinding>(),
-        View.OnClickListener {
+    View.OnClickListener {
     val TAG = this::class.java.simpleName
     override val viewModel: NoteDetailViewModel by getLazyViewModel(ViewModelScope.FRAGMENT)
     override val layoutId: Int = R.layout.fragment_note_detail
@@ -23,6 +23,8 @@ class NoteDetailFragment : BaseFragment<NoteDetailViewModel, FragmentNoteDetailB
         super.onViewInitialized(binding)
         initClicks()
         initObservers()
+        viewModel.currentFolerId = requireArguments().getInt("folderId")
+
 
         viewModel.savedNoteItem.observeSafe(viewLifecycleOwner) {
             binding.note = it
@@ -54,15 +56,19 @@ class NoteDetailFragment : BaseFragment<NoteDetailViewModel, FragmentNoteDetailB
         val title = binding.noteDetailTitle.text.toString()
         if (title.isEmpty()) {
             Toast.makeText(context, "لطفا عنوان یادداشت خود را وارد کنید", Toast.LENGTH_SHORT)
-                    .show()
+                .show()
             return
         }
         val content = binding.noteDetailContent.text.toString()
 
         viewModel.saveNote(
-                NoteItem(
-                        0, requireArguments().getInt("folderId", 0), content, title, DateHelper.getCurrentDateInMilli()
-                )
+            NoteItem(
+                id = 0,
+                folderId = requireArguments().getInt("folderId", 0),
+                content = content,
+                title = title,
+                created_data = DateHelper.getCurrentDateInMilli()
+            )
         )
     }
 

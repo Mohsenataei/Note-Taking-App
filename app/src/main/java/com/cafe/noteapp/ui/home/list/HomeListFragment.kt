@@ -96,6 +96,4 @@ class HomeListFragment : BaseFragment<HomeListViewModel, FragmentHomeListBinding
             }
         }
     }
-
-
 }

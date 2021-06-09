@@ -15,7 +15,7 @@ import com.cafe.noteapp.util.extentions.findNaveController
 import com.cafe.noteapp.util.extentions.observeSafe
 
 class ListDetailFragment : BaseFragment<ListDetailViewModel, FragmentListDetailBinding>(),
-        View.OnClickListener {
+    View.OnClickListener {
     override val viewModel: ListDetailViewModel by getLazyViewModel(ViewModelScope.FRAGMENT)
     override val layoutId: Int = R.layout.fragment_list_detail
 
@@ -25,19 +25,21 @@ class ListDetailFragment : BaseFragment<ListDetailViewModel, FragmentListDetailB
         viewModel.currentFolderId = requireArguments().getInt("folderId", -1)
         binding.listDetailTitle.text = requireArguments().getString("folderName", "نام پوشه")
         viewModel.getAllNotes(
-                viewModel.currentFolderId.toString()
+            viewModel.currentFolderId.toString()
         )
 
         binding.adapter = MultiLayoutAdapter<ListItem, ListRowItemBinding>(
-                layoutId = R.layout.list_row_item,
-                onItemClicked = {
-                    findNaveController()
-                            .navigate(ListDetailFragmentDirections.actionListDetailFragmentToNoteDetailFragment(
-                                    viewModel.currentFolderId,
-                                    it.id
-                            ))
+            layoutId = R.layout.list_row_item,
+            onItemClicked = {
+                findNaveController()
+                    .navigate(
+                        ListDetailFragmentDirections.actionListDetailFragmentToNoteDetailFragment(
+                            viewModel.currentFolderId,
+                            it.id
+                        )
+                    )
 
-                }
+            }
         )
 
         viewModel.allNotesLiveData.observeSafe(viewLifecycleOwner) {
@@ -60,10 +62,10 @@ class ListDetailFragment : BaseFragment<ListDetailViewModel, FragmentListDetailB
 
             R.id.addNewNote -> {
                 findNaveController().navigate(
-                        ListDetailFragmentDirections.actionListDetailFragmentToNoteDetailFragment(
-                                requireArguments().getInt("folderId", -1),
-                                0
-                        )
+                    ListDetailFragmentDirections.actionListDetailFragmentToNoteDetailFragment(
+                        viewModel.currentFolderId,
+                        0
+                    )
                 )
             }
 
