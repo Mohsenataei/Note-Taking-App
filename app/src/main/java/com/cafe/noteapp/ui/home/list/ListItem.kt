@@ -7,7 +7,7 @@ data class ListItem(
         val name: String,
         val type: String,
         val description: String?,
-        val createDate: Long,
+        val createDate: String?,
         val icon: Drawable?,
         val iconBackground: Drawable?
 )

@@ -7,6 +7,10 @@
     <data>
 
         <variable
+            name="listViewModel"
+            type="com.cafe.noteapp.ui.home.list.HomeListViewModel" />
+
+        <variable
             name="item"
             type="com.cafe.noteapp.ui.home.list.ListItem" />
     </data>
@@ -14,8 +18,8 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_small"
         android:layout_marginStart="@dimen/margin_x_middle"
+        android:layout_marginTop="@dimen/margin_small"
         android:layout_marginEnd="@dimen/margin_x_middle"
         app:cardCornerRadius="@dimen/radius_x_small">
 
@@ -40,6 +44,8 @@
                 style="@style/AppTheme.TextView.RowTitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
                 android:text="@{item.name}"
                 app:layout_constraintEnd_toStartOf="@id/icon"
                 app:layout_constraintStart_toEndOf="@id/moreOptions"
@@ -62,7 +68,8 @@
                 android:id="@+id/moreOptions"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/padding_middle"
+                android:onClick="@{(v) -> listViewModel.onOptionClicked(item)}"
+                android:padding="@dimen/padding_large"
                 android:src="@drawable/ic_more"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

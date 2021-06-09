@@ -13,16 +13,19 @@ import com.cafe.noteapp.ui.home.list.HomeListViewModel
 import com.cafe.noteapp.ui.home.list.ListItem
 import com.cafe.noteapp.ui.home.list.NoteItem
 import com.cafe.noteapp.ui.home.list.mapToNoteItems
+import com.cafe.noteapp.util.hepers.Convertor
 import com.cafe.noteapp.util.livedata.NonNullLiveData
 import com.cafe.noteapp.util.provider.BaseResourceProvider
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class ListDetailViewModel @Inject constructor(
-        private val noteRepository: NoteRepository,
-        private val resourceProvider: BaseResourceProvider
+    private val noteRepository: NoteRepository,
+    private val resourceProvider: BaseResourceProvider
 ) : BaseViewModel() {
 
+    @Inject
+    lateinit var convertor: Convertor
     private val _allNotesLiveData = NonNullLiveData<List<ListItem>>(emptyList())
     val allNotesLiveData: LiveData<List<ListItem>>
         get() = _allNotesLiveData
@@ -46,13 +49,13 @@ class ListDetailViewModel @Inject constructor(
     private fun mapNotesToListItem(notes: List<NoteItem>): List<ListItem> {
         return notes.map {
             ListItem(
-                    id = it.id ?: -1,
-                    name = it.title,
-                    description = it.created_data.toString(),
-                    type = HomeListViewModel.NOTE,
-                    createDate = 0,
-                    icon = resourceProvider.getDrawable(R.drawable.ic_note_blue),
-                    iconBackground = resourceProvider.getDrawable(R.drawable.circle_light_blue_bg)
+                id = it.id ?: -1,
+                name = it.title,
+                description = convertor.getTimeAgo(it.created_data),
+                type = HomeListViewModel.NOTE,
+                createDate = convertor.getTimeAgo(it.created_data),
+                icon = resourceProvider.getDrawable(R.drawable.ic_note_blue),
+                iconBackground = resourceProvider.getDrawable(R.drawable.circle_light_blue_bg)
             )
         }
     }

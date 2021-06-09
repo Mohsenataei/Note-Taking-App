@@ -18,9 +18,9 @@ import androidx.room.*
 data class Note(
     @PrimaryKey
     val index: Int?,
+    val folderId: Int? = null,
     @ColumnInfo(name = "creation_date")
     val creationDate: Long,
     val contents: String,
-    val title: String,
-    val folderId: String? = null
+    val title: String
 )

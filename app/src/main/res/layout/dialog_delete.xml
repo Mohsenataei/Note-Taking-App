@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_x_middle"
+        android:background="@drawable/shape_white_base_rectangle"
+        android:padding="@dimen/padding_x_middle">
+
+        <TextView
+            android:id="@+id/title"
+            style="@style/AppTheme.TextView.Title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/delete_note"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/desctiption"
+            style="@style/AppTheme.TextView.DialogHeadLine"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/are_you_sure_want_to_delete_this_folder"
+            app:layout_constraintTop_toBottomOf="@id/title" />
+
+        <Button
+            android:id="@+id/confirm"
+            style="@style/AppTheme.Button.Confirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_x_middle"
+            android:text="@string/delete"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/desctiption" />
+
+        <Button
+            android:id="@+id/cancel"
+            style="@style/AppTheme.Button.Cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cancel"
+            app:layout_constraintStart_toEndOf="@id/confirm"
+            app:layout_constraintTop_toBottomOf="@+id/desctiption" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

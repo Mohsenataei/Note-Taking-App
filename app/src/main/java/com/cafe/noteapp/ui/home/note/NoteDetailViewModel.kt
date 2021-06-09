@@ -18,27 +18,33 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class NoteDetailViewModel @Inject constructor(
-        private val noteRepository: NoteRepository
+    private val noteRepository: NoteRepository
 ) : BaseViewModel() {
 
-    val isInsertionDone = SingleEventLiveData<Boolean>().apply { value = false }
-    private val _noteLoadingLiveData = NonNullLiveData<Boolean>(false)
-    val noteLoadingLiveData: LiveData<Boolean>
-        get() = _noteLoadingLiveData
+    val isInsertionOrUpdateDone = SingleEventLiveData<Boolean>().apply { value = false }
+    private val _loadingVisibilityLiveData = NonNullLiveData<Boolean>(false)
+    val loadingVisibilityLiveData: LiveData<Boolean>
+        get() = _loadingVisibilityLiveData
 
     private val _savedNoteLiveData = MutableLiveData<NoteItem>()
     val savedNoteItem: LiveData<NoteItem>
         get() = _savedNoteLiveData
 
+    var currentFolderId = -1
+    var currentNoteId: Int = 0
+
     fun saveNote(noteItem: NoteItem) {
-        _noteLoadingLiveData.value = false
+        _loadingVisibilityLiveData.value = true
         viewModelScope.launch {
             when (val result = noteRepository.insertNote(mapToNote(noteItem))) {
                 is Right -> {
-                    _noteLoadingLiveData.value = true
-                    isInsertionDone.value = true
+                    _loadingVisibilityLiveData.value = false
+                    isInsertionOrUpdateDone.value = true
                 }
-                is Left -> showError(result.a)
+                is Left -> {
+                    _loadingVisibilityLiveData.value = false
+                    showError(result.a)
+                }
             }
         }
     }
@@ -54,7 +60,24 @@ class NoteDetailViewModel @Inject constructor(
 
 
     private fun showError(error: Error) {
-        Log.d(TAG, "showError: $error")
+        Log.e(TAG, "showError: $error")
+    }
+
+    fun updateNote(noteItem: NoteItem) {
+        viewModelScope.launch {
+            _loadingVisibilityLiveData.value = true
+            when (val result = noteRepository.updateNote(mapToNote(noteItem))) {
+                is Right -> {
+                    _loadingVisibilityLiveData.value = false
+                    isInsertionOrUpdateDone.value = true
+
+                }
+                is Left -> {
+                    _loadingVisibilityLiveData.value = false
+                    showError(result.a)
+                }
+            }
+        }
     }
 
 

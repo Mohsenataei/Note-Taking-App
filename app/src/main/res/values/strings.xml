@@ -5,4 +5,18 @@
     <string name="write_your_folder_title">برای پوشه خود عنوان بنویسید .</string>
     <string name="create_folder">ایجاد پوشه</string>
     <string name="cancel">انصراف</string>
+    <string name="just_now">لحضاتی پیش</string>
+    <string name="a_minute_ago">یک دقیقه پیش</string>
+    <string name="seconds_ago">ثانیه پیش</string>
+    <string name="minute_ago">دقیقه پیش</string>
+    <string name="hours_ago">ساعت پیش</string>
+    <string name="an_hours_ago">یک ساعت پیش</string>
+    <string name="yesterday">دیروز</string>
+    <string name="day_ago">روز پیش</string>
+    <string name="month_ago">ماه پیش</string>
+    <string name="edit_title">تغییر عنوان</string>
+    <string name="delete_title">حذف کردن</string>
+    <string name="are_you_sure_want_to_delete_this_folder">آیا از حذف این پوشه اطمینان دارید ؟</string>
+    <string name="delete_note">حذف یادداشت</string>
+    <string name="delete">حذف</string>
 </resources>

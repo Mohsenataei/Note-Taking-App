@@ -2,7 +2,9 @@ package com.cafe.noteapp.di.module
 
 import android.content.Context
 import com.cafe.noteapp.app.NoteApp
+import com.cafe.noteapp.bus.EventBus
 import com.cafe.noteapp.di.builder.ViewModelBuilder
+import com.cafe.noteapp.util.hepers.Convertor
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -17,5 +19,13 @@ object AppModule {
     }
 
 
+    @Provides
+    @Singleton
+    fun provideConvertor() = Convertor
+
+
+    @Provides
+    @Singleton
+    internal fun eventBus() = EventBus.instance
 
 }

@@ -10,18 +10,24 @@ interface NoteDao {
     @Query("SELECT * FROM notes")
     suspend fun getNotes(): List<Note>
 
-    @Query("SELECT * FROM notes WHERE folderId = :folderId")
+    @Query("SELECT * FROM notes WHERE `folderId` = :folderId")
     suspend fun getNotesInFolder(folderId: String): List<Note>
 
     @Query("SELECT * FROM notes WHERE `index` = :id")
     suspend fun getNoteById(id: Int): Note
 
-    @Delete
-    suspend fun deleteNote(note: Note)
+    @Update
+    suspend fun updateNote(note: Note): Int
+
+    @Query("DELETE FROM notes WHERE `index` = :id")
+    suspend fun deleteNote(id: Int): Int
 
     @Query("SELECT * from notes WHERE folderId = 0")
     suspend fun getOrphanNotes(): List<Note>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertOrUpdate(note: Note): Long
+
+    @Query("SELECT COUNT(folderId) FROM notes WHERE folderId = :folderId")
+    suspend fun getFNotesInFolderCount(folderId: Int?): Int
 }
