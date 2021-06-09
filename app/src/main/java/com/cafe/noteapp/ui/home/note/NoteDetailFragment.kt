@@ -8,7 +8,7 @@ import com.cafe.noteapp.databinding.FragmentNoteDetailBinding
 import com.cafe.noteapp.ui.base.BaseFragment
 import com.cafe.noteapp.ui.base.ViewModelScope
 import com.cafe.noteapp.ui.home.list.NoteItem
-import com.cafe.noteapp.util.DateHelper
+import com.cafe.noteapp.util.hepers.DateHelper
 import com.cafe.noteapp.util.extentions.findNaveController
 import com.cafe.noteapp.util.extentions.observeSafe
 

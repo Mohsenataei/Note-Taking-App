@@ -12,7 +12,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
 import com.cafe.noteapp.R
 import com.cafe.noteapp.databinding.DialogNewFolderBinding
-import com.cafe.noteapp.util.DateHelper
+import com.cafe.noteapp.util.hepers.DateHelper
 
 
 class NewFolderDialog(

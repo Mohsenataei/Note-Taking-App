@@ -13,6 +13,7 @@ import com.cafe.data.source.repository.notes.NoteRepository
 import com.cafe.noteapp.R
 import com.cafe.noteapp.ui.base.BaseViewModel
 import com.cafe.noteapp.ui.home.dialog.FolderItem
+import com.cafe.noteapp.util.hepers.Convertor
 import com.cafe.noteapp.util.livedata.NonNullLiveData
 import com.cafe.noteapp.util.provider.BaseResourceProvider
 import kotlinx.coroutines.launch
@@ -39,6 +40,8 @@ class HomeListViewModel @Inject constructor(
     val listItemLiveData: LiveData<List<ListItem>>
         get() = _listItemLiveData
 
+    @Inject
+    lateinit var convertor: Convertor
 
     private fun refreshList() {
         getFiles()
@@ -175,8 +178,8 @@ class HomeListViewModel @Inject constructor(
                 id = it.id,
                 name = it.name,
                 type = it.type,
-                description = it.description,
-                createDate = it.createdData,
+                description = if (it.type == NOTE) convertor.getTimeAgo(it.createdData) else "",
+                createDate = convertor.getTimeAgo(it.createdData),
                 icon = if (it.type == NOTE) resourceProvider.getDrawable(R.drawable.ic_note_blue) else resourceProvider.getDrawable(
                     R.drawable.ic_folder_orange
                 ),

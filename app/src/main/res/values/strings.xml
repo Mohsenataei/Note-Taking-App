@@ -5,4 +5,13 @@
     <string name="write_your_folder_title">برای پوشه خود عنوان بنویسید .</string>
     <string name="create_folder">ایجاد پوشه</string>
     <string name="cancel">انصراف</string>
+    <string name="just_now">لحضاتی پیش</string>
+    <string name="a_minute_ago">یک دقیقه پیش</string>
+    <string name="seconds_ago">ثانیه پیش</string>
+    <string name="minute_ago">دقیقه پیش</string>
+    <string name="hours_ago">ساعت پیش</string>
+    <string name="an_hours_ago">ساعت پیش</string>
+    <string name="yesterday">دیروز</string>
+    <string name="day_ago">روز پیش</string>
+    <string name="month_ago">ماه پیش</string>
 </resources>
