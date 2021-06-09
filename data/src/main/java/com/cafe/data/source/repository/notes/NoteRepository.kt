@@ -28,9 +28,9 @@ class NoteRepository @Inject constructor(
         return safeCall { noteDao.insertOrUpdate(note) }
     }
 
-    suspend fun deleteNote(note: Note) {
-        safeCall {
-            noteDao.deleteNote(note)
+    suspend fun deleteNote(noteId: Int): Either<Error,Int>  {
+      return  safeCall {
+            noteDao.deleteNote(noteId)
         }
     }
 

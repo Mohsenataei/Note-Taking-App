@@ -14,4 +14,9 @@
     <string name="yesterday">دیروز</string>
     <string name="day_ago">روز پیش</string>
     <string name="month_ago">ماه پیش</string>
+    <string name="edit_title">تغییر عنوان</string>
+    <string name="delete_title">حذف کردن</string>
+    <string name="are_you_sure_want_to_delete_this_folder">آیا از حذف این پوشه اطمینان دارید ؟</string>
+    <string name="delete_note">حذف یادداشت</string>
+    <string name="delete">حذف</string>
 </resources>

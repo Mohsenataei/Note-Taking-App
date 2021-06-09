@@ -19,8 +19,8 @@ interface NoteDao {
     @Update
     suspend fun updateNote(note: Note): Int
 
-    @Delete
-    suspend fun deleteNote(note: Note)
+    @Query("DELETE FROM notes WHERE `index` = :id")
+    suspend fun deleteNote(id: Int): Int
 
     @Query("SELECT * from notes WHERE folderId = 0")
     suspend fun getOrphanNotes(): List<Note>
