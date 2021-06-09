@@ -63,6 +63,11 @@ class NoteRepository @Inject constructor(
         return safeCall { noteDao.getOrphanNotes() }
     }
 
+    suspend fun getNotesCountInFolder(folderId: Int?): Either<Error, Int> {
+        return safeCall { noteDao.getFNotesInFolderCount(folderId) }
+    }
+
+
     // new approach
 
     suspend fun getListItem(): Either<Error, List<File>> {
@@ -83,6 +88,7 @@ class NoteRepository @Inject constructor(
                 id = it.index ?: -1,
                 name = it.title,
                 description = null,
+                childCount = 0,
                 type = "NOTE",
                 createdData = it.creationDate
             )
@@ -92,7 +98,7 @@ class NoteRepository @Inject constructor(
                     File(
                         id = it.id.toInt(),
                         name = it.name,
-                        description = "حاوی ${folders.size} یادداشت ",
+                        description = null,
                         type = "FOLDER",
                         createdData = it.createDate
                     )

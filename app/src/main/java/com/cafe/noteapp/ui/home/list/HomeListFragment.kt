@@ -17,7 +17,7 @@ import com.cafe.noteapp.util.extentions.findNaveController
 import com.cafe.noteapp.util.extentions.observeSafe
 
 class HomeListFragment : BaseFragment<HomeListViewModel, FragmentHomeListBinding>(),
-        View.OnClickListener {
+    View.OnClickListener {
     override val layoutId: Int
         get() = R.layout.fragment_home_list
 
@@ -28,21 +28,31 @@ class HomeListFragment : BaseFragment<HomeListViewModel, FragmentHomeListBinding
         initView()
         binding.viewModel = viewModel
         binding.adapter = MultiLayoutAdapter<ListItem, ListRowItemBinding>(
-                layoutId = R.layout.list_row_item,
-                onItemClicked = {
-                    Log.d(TAG, "onViewInitialized: $it")
-                    when (it.type) {
-                        FOLDER -> findNaveController().navigate(HomeListFragmentDirections
-                                .actionHomeListFragmentToListDetailFragment(
-                                        it.id,
-                                        it.name
-                                ))
+            layoutId = R.layout.list_row_item,
+            onItemClicked = {
+                Log.d(TAG, "onViewInitialized: $it")
+                when (it.type) {
+                    FOLDER -> findNaveController().navigate(
+                        HomeListFragmentDirections
+                            .actionHomeListFragmentToListDetailFragment(
+                                it.id,
+                                it.name
+                            )
+                    )
 
-                        NOTE -> findNaveController().navigate(HomeListFragmentDirections.actionHomeListFragmentToNoteDetailFragment(0, it.id))
-
-                    }
+                    NOTE -> findNaveController().navigate(
+                        HomeListFragmentDirections.actionHomeListFragmentToNoteDetailFragment(
+                            0,
+                            it.id
+                        )
+                    )
 
                 }
+
+            },
+            onBind = {
+                listViewModel = viewModel
+            }
         )
 
         viewModel.listItemLiveData.observeSafe(viewLifecycleOwner) {
@@ -55,7 +65,6 @@ class HomeListFragment : BaseFragment<HomeListViewModel, FragmentHomeListBinding
 
     }
 
-
     private fun initView() {
         binding.plusBtn.setOnClickListener(this)
         binding.addNoteBtn.setOnClickListener(this)
@@ -64,12 +73,12 @@ class HomeListFragment : BaseFragment<HomeListViewModel, FragmentHomeListBinding
 
     private fun addFolderDialog() {
         val newFolderDialog = NewFolderDialog(
-                onConfirm = {
-                    viewModel.insertNewFolder(it)
-                },
-                onCancel = {
+            onConfirm = {
+                viewModel.insertNewFolder(it)
+            },
+            onCancel = {
 
-                }
+            }
         )
 
         newFolderDialog.show(childFragmentManager, newFolderDialog.tag)
@@ -88,10 +97,10 @@ class HomeListFragment : BaseFragment<HomeListViewModel, FragmentHomeListBinding
 
             R.id.addNoteBtn -> {
                 findNaveController().navigate(
-                        HomeListFragmentDirections.actionHomeListFragmentToNoteDetailFragment(
-                                0,
-                                0
-                        )
+                    HomeListFragmentDirections.actionHomeListFragmentToNoteDetailFragment(
+                        0,
+                        0
+                    )
                 )
             }
         }

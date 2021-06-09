@@ -1,6 +1,7 @@
 package com.cafe.noteapp.ui.home.list
 
 import android.util.Log
+import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import arrow.core.Either.Left
@@ -130,6 +131,10 @@ class HomeListViewModel @Inject constructor(
         }
     }
 
+    fun onOptionClicked(listItem: ListItem) {
+        Log.d(TAG, "onOptionClicked: click on more options ${listItem}")
+    }
+
 //    private fun mapNotesToListItem(notes: List<NoteItem>): List<ListItem> {
 //        return notes.map {
 //            ListItem(
@@ -172,13 +177,14 @@ class HomeListViewModel @Inject constructor(
         }
     }
 
+
     private fun mapFilesToListItem(files: List<File>): List<ListItem> {
         return files.map {
             ListItem(
                 id = it.id,
                 name = it.name,
                 type = it.type,
-                description = if (it.type == NOTE) convertor.getTimeAgo(it.createdData) else "",
+                description = if (it.type == NOTE) convertor.getTimeAgo(it.createdData) else "حاوی ${it.childCount} یادداشت ",
                 createDate = convertor.getTimeAgo(it.createdData),
                 icon = if (it.type == NOTE) resourceProvider.getDrawable(R.drawable.ic_note_blue) else resourceProvider.getDrawable(
                     R.drawable.ic_folder_orange

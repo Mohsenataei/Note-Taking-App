@@ -51,7 +51,7 @@ class ListDetailViewModel @Inject constructor(
             ListItem(
                 id = it.id ?: -1,
                 name = it.title,
-                description = it.created_data.toString(),
+                description = convertor.getTimeAgo(it.created_data),
                 type = HomeListViewModel.NOTE,
                 createDate = convertor.getTimeAgo(it.created_data),
                 icon = resourceProvider.getDrawable(R.drawable.ic_note_blue),

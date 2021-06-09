@@ -10,7 +10,7 @@
     <string name="seconds_ago">ثانیه پیش</string>
     <string name="minute_ago">دقیقه پیش</string>
     <string name="hours_ago">ساعت پیش</string>
-    <string name="an_hours_ago">ساعت پیش</string>
+    <string name="an_hours_ago">یک ساعت پیش</string>
     <string name="yesterday">دیروز</string>
     <string name="day_ago">روز پیش</string>
     <string name="month_ago">ماه پیش</string>

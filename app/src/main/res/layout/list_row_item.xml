@@ -7,6 +7,10 @@
     <data>
 
         <variable
+            name="listViewModel"
+            type="com.cafe.noteapp.ui.home.list.HomeListViewModel" />
+
+        <variable
             name="item"
             type="com.cafe.noteapp.ui.home.list.ListItem" />
     </data>
@@ -64,7 +68,8 @@
                 android:id="@+id/moreOptions"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/padding_middle"
+                android:onClick="@{(v) -> listViewModel.onOptionClicked(item)}"
+                android:padding="@dimen/padding_large"
                 android:src="@drawable/ic_more"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

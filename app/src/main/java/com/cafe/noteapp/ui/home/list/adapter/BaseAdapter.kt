@@ -108,9 +108,4 @@ abstract class BaseAdapter<T : Any, B : ViewDataBinding>(
         items.clear()
         items.addAll(newItems)
     }
-
-    open fun setItems(newItems: List<T>) {
-        items.addAll(newItems)
-        notifyDataSetChanged()
-    }
 }

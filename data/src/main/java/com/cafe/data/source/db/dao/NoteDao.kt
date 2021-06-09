@@ -27,4 +27,7 @@ interface NoteDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertOrUpdate(note: Note): Long
+
+    @Query("SELECT COUNT(folderId) FROM notes WHERE folderId = :folderId")
+    suspend fun getFNotesInFolderCount(folderId: Int?): Int
 }

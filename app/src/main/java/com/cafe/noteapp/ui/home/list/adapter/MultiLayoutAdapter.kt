@@ -10,9 +10,4 @@ open class MultiLayoutAdapter<T : Any, B : ViewDataBinding>(
 ) : BaseAdapter<T, B>(items = items, onItemClicked = onItemClicked, onBind = onBind) {
 
     override fun getLayoutId(position: Int): Int = layoutId
-
-    override fun getItemViewType(position: Int): Int {
-        return super.getItemViewType(position)
-
-    }
 }

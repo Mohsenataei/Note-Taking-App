@@ -45,7 +45,6 @@
 
     <style name="AppTheme.TextView.Base" parent="TextView">
         <item name="fontStyle">normal</item>
-        <item name="android:gravity">start</item>
         <item name="android:fontFamily">@font/default_font</item>
         <item name="android:textColor">@color/textColorPrimary</item>
     </style>
