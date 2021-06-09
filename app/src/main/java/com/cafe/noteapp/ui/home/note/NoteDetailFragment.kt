@@ -1,6 +1,5 @@
 package com.cafe.noteapp.ui.home.note
 
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.core.view.isVisible
@@ -23,7 +22,8 @@ class NoteDetailFragment : BaseFragment<NoteDetailViewModel, FragmentNoteDetailB
         super.onViewInitialized(binding)
         initClicks()
         initObservers()
-        viewModel.currentFolerId = requireArguments().getInt("folderId")
+        viewModel.currentFolderId = requireArguments().getInt("folderId")
+        viewModel.currentNoteId = (requireArguments().getInt("noteId", 0))
 
 
         viewModel.savedNoteItem.observeSafe(viewLifecycleOwner) {
@@ -36,7 +36,7 @@ class NoteDetailFragment : BaseFragment<NoteDetailViewModel, FragmentNoteDetailB
     }
 
     private fun initObservers() {
-        viewModel.noteLoadingLiveData.observeSafe(viewLifecycleOwner) {
+        viewModel.loadingVisibilityLiveData.observeSafe(viewLifecycleOwner) {
             binding.noteLading.isVisible = it
         }
 
@@ -44,7 +44,7 @@ class NoteDetailFragment : BaseFragment<NoteDetailViewModel, FragmentNoteDetailB
             viewModel.getNoteById(it)
         }
 
-        viewModel.isInsertionDone.observeSafe(viewLifecycleOwner) { isDone ->
+        viewModel.isInsertionOrUpdateDone.observeSafe(viewLifecycleOwner) { isDone ->
             if (isDone)
                 findNaveController().popBackStack()
         }
@@ -52,6 +52,8 @@ class NoteDetailFragment : BaseFragment<NoteDetailViewModel, FragmentNoteDetailB
 
     }
 
+
+    //todo clear up this mess later too
     private fun saveNote() {
         val title = binding.noteDetailTitle.text.toString()
         if (title.isEmpty()) {
@@ -72,10 +74,34 @@ class NoteDetailFragment : BaseFragment<NoteDetailViewModel, FragmentNoteDetailB
         )
     }
 
+    private fun updateNote() {
+        val title = binding.noteDetailTitle.text.toString()
+        if (title.isEmpty()) {
+            Toast.makeText(context, "لطفا عنوان یادداشت خود را وارد کنید", Toast.LENGTH_SHORT)
+                .show()
+            return
+        }
+        val content = binding.noteDetailContent.text.toString()
+
+        viewModel.updateNote(
+            NoteItem(
+                id = viewModel.currentNoteId,
+                folderId = requireArguments().getInt("folderId", 0),
+                content = content,
+                title = title,
+                created_data = DateHelper.getCurrentDateInMilli()
+            )
+        )
+    }
+
+
     override fun onClick(view: View?) {
         when (view?.id) {
             R.id.listDetailBackBtn -> {
-                saveNote()
+                if (viewModel.currentNoteId == 0)
+                    saveNote()
+                else
+                    updateNote()
             }
         }
     }

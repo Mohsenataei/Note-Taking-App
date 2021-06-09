@@ -33,7 +33,7 @@ fun mapToNoteItem(notes: Note): NoteItem {
 
 fun mapToNote(noteItem: NoteItem): Note {
     return Note(
-        index = null,
+        index = noteItem.id,
         folderId = noteItem.folderId,
         contents = noteItem.content,
         title = noteItem.title,

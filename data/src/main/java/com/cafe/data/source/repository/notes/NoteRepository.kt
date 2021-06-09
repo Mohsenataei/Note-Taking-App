@@ -15,9 +15,9 @@ import com.cafe.data.source.repository.BaseRepository
 import javax.inject.Inject
 
 class NoteRepository @Inject constructor(
-        errorMapper: ErrorMapper,
-        private val noteDao: NoteDao,
-        private val folderDao: FolderDao
+    errorMapper: ErrorMapper,
+    private val noteDao: NoteDao,
+    private val folderDao: FolderDao
 ) : BaseRepository(errorMapper) {
 
     suspend fun getAllNotes(): Either<Error, List<Note>> {
@@ -41,6 +41,10 @@ class NoteRepository @Inject constructor(
     suspend fun getNoteById(id: Int): Either<Error, Note> {
 
         return safeCall { noteDao.getNoteById(id) }
+    }
+
+    suspend fun updateNote(note: Note): Either<Error, Int> {
+        return safeCall { noteDao.updateNote(note) }
     }
 
     suspend fun insertNewFolder(folder: Folder): Either<Error, Long> {
@@ -76,28 +80,28 @@ class NoteRepository @Inject constructor(
 
         val listItem = notes.map {
             File(
-                    id = it.index ?: -1,
-                    name = it.title,
-                    description = null,
-                    type = "NOTE",
-                    createdData = it.creationDate
+                id = it.index ?: -1,
+                name = it.title,
+                description = null,
+                type = "NOTE",
+                createdData = it.creationDate
             )
         }.toMutableList()
-                .apply {
-                    folders.map {
-                        File(
-                                id = it.id.toInt(),
-                                name = it.name,
-                                description = "حاوی ${folders.size} یادداشت ",
-                                type = "FOLDER",
-                                createdData = it.createDate
-                        )
-                    }.let {
-                        this?.addAll(
-                                it
-                        )
-                    }
-                }.sortedWith(compareByDescending { it.createdData })
+            .apply {
+                folders.map {
+                    File(
+                        id = it.id.toInt(),
+                        name = it.name,
+                        description = "حاوی ${folders.size} یادداشت ",
+                        type = "FOLDER",
+                        createdData = it.createDate
+                    )
+                }.let {
+                    this?.addAll(
+                        it
+                    )
+                }
+            }.sortedWith(compareByDescending { it.createdData })
 
         return Either.right(listItem)
 
